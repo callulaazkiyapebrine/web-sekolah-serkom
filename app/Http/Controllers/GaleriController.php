@@ -1,0 +1,344 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AlbumGaleri;
+use App\Models\MediaGaleri;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+class GaleriController extends Controller
+{
+    // Menampilkan daftar album di halaman admin.
+    public function index()
+    {
+        $galeri = AlbumGaleri::withCount([
+            'media as jumlah_foto' => function ($query) {
+                $query->where('kategori', 'foto');
+            },
+            'media as jumlah_video' => function ($query) {
+                $query->where('kategori', 'video');
+            },
+        ])
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        return view('admin.galeri.index', compact('galeri'));
+    }
+
+    // Form tambah dan edit album.
+    public function addEdit($id = null)
+    {
+        $album = null;
+
+        if ($id) {
+            try {
+                $id = Crypt::decrypt($id);
+
+                $album = AlbumGaleri::with('media')
+                    ->findOrFail($id);
+            } catch (\Exception $e) {
+                return redirect()
+                    ->route('admin.galeri.index')
+                    ->with('error', 'Album tidak ditemukan.');
+            }
+        }
+
+        return view('admin.galeri.form', compact('album'));
+    }
+
+    // Menyimpan album, foto, video, dan link video.
+    public function save(Request $request, $id = null)
+    {
+        $album = null;
+
+        if ($request->filled('id_album')) {
+            try {
+                $idAlbum = Crypt::decrypt($request->id_album);
+
+                $album = AlbumGaleri::findOrFail($idAlbum);
+            } catch (\Exception $e) {
+                return back()
+                    ->withInput()
+                    ->with('error', 'Album tidak ditemukan.');
+            }
+        }
+
+        $request->validate([
+            'judul' => ['required', 'string', 'max:100'],
+            'tanggal' => ['required', 'date'],
+            'keterangan' => ['nullable', 'string'],
+
+            'foto_files' => ['nullable', 'array'],
+            'foto_files.*' => [
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:10240',
+            ],
+
+            'video_files' => ['nullable', 'array'],
+            'video_files.*' => [
+                'file',
+                'mimetypes:video/mp4,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/webm,video/x-matroska',
+                'mimes:mp4,mov,avi,wmv,webm,mkv',
+                'max:102400',
+            ],
+
+            'video_urls' => ['nullable', 'string', 'max:20000'],
+            'hapus_media' => ['nullable', 'array'],
+            'hapus_media.*' => ['required', 'string'],
+        ], [
+            'judul.required' => 'Judul album wajib diisi.',
+            'judul.max' => 'Judul album maksimal 100 karakter.',
+            'tanggal.required' => 'Tanggal acara wajib diisi.',
+
+            'foto_files.*.image' => 'Semua file foto harus berupa gambar.',
+            'foto_files.*.mimes' => 'Foto harus berformat JPG, JPEG, PNG, atau WEBP.',
+            'foto_files.*.max' => 'Ukuran setiap foto maksimal 10 MB.',
+
+            'video_files.*.mimes' => 'Video harus berformat MP4, MOV, AVI, WMV, WEBM, atau MKV.',
+            'video_files.*.max' => 'Ukuran setiap video maksimal 100 MB.',
+        ]);
+
+        // Memisahkan link video berdasarkan baris.
+        $daftarLink = collect(
+            preg_split(
+                '/\r\n|\r|\n/',
+                trim($request->input('video_urls', ''))
+            )
+        )
+            ->map(fn ($url) => trim($url))
+            ->filter(fn ($url) => $url !== '')
+            ->values();
+
+        // Memastikan setiap link menggunakan HTTP atau HTTPS.
+        foreach ($daftarLink as $url) {
+            if (
+                !filter_var($url, FILTER_VALIDATE_URL) ||
+                !in_array(
+                    strtolower((string) parse_url($url, PHP_URL_SCHEME)),
+                    ['http', 'https'],
+                    true
+                )
+            ) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'video_urls' => 'Setiap baris link video harus berupa URL HTTP atau HTTPS yang valid.',
+                    ]);
+            }
+        }
+
+        $fileBaru = [];
+        $fileLamaUntukDihapus = [];
+
+        DB::beginTransaction();
+
+        try {
+            // Membuat album baru jika bukan proses edit.
+            if (!$album) {
+                $album = new AlbumGaleri();
+            }
+
+            $album->judul = $request->judul;
+            $album->tanggal = $request->tanggal;
+            $album->keterangan = $request->keterangan;
+            $album->save();
+
+            // Menyimpan banyak foto.
+            foreach ($request->file('foto_files', []) as $foto) {
+                $path = $foto->store('galeri', 'public');
+
+                if (!$path) {
+                    throw new \Exception('Foto gagal disimpan.');
+                }
+
+                $fileBaru[] = $path;
+
+                $album->media()->create([
+                    'kategori' => 'foto',
+                    'file' => $path,
+                ]);
+            }
+
+            // Menyimpan banyak video yang diunggah.
+            foreach ($request->file('video_files', []) as $video) {
+                $path = $video->store('galeri', 'public');
+
+                if (!$path) {
+                    throw new \Exception('Video gagal disimpan.');
+                }
+
+                $fileBaru[] = $path;
+
+                $album->media()->create([
+                    'kategori' => 'video',
+                    'file' => $path,
+                ]);
+            }
+
+            // Menyimpan link video, satu link per baris.
+            foreach ($daftarLink as $url) {
+                $album->media()->create([
+                    'kategori' => 'video',
+                    'file' => $url,
+                ]);
+            }
+
+            // Menghapus media yang dipilih saat mengedit album.
+            foreach ($request->input('hapus_media', []) as $encryptedId) {
+                try {
+                    $mediaId = Crypt::decrypt($encryptedId);
+                } catch (\Exception $e) {
+                    throw new \Exception('ID media tidak valid.');
+                }
+
+                $media = MediaGaleri::where('id_album', $album->id_album)
+                    ->where('id_media', $mediaId)
+                    ->first();
+
+                if (!$media) {
+                    continue;
+                }
+
+                // Catat file lokal untuk dihapus setelah transaksi berhasil.
+                if (
+                    $media->file &&
+                    !Str::startsWith(
+                        $media->file,
+                        ['http://', 'https://']
+                    )
+                ) {
+                    $fileLamaUntukDihapus[] = $media->file;
+                }
+
+                $media->delete();
+            }
+
+            DB::commit();
+
+            // Hapus file lama setelah database berhasil disimpan.
+            foreach (array_unique($fileLamaUntukDihapus) as $path) {
+                Storage::disk('public')->delete($path);
+            }
+
+            return redirect()
+                ->route('admin.galeri.index')
+                ->with(
+                    'success',
+                    $request->filled('id_album')
+                        ? 'Album berhasil diperbarui.'
+                        : 'Album berhasil ditambahkan.'
+                );
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            // Bersihkan file baru jika penyimpanan gagal.
+            foreach ($fileBaru as $path) {
+                Storage::disk('public')->delete($path);
+            }
+
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with(
+                    'error',
+                    'Album gagal disimpan. Periksa kembali data dan konfigurasi database.'
+                );
+        }
+    }
+
+    // Detail album di halaman admin.
+    public function show($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $album = AlbumGaleri::with('media')
+                ->findOrFail($id);
+
+            return view('admin.galeri.show', compact('album'));
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.galeri.index')
+                ->with('error', 'Album tidak ditemukan.');
+        }
+    }
+
+    // Menghapus album beserta seluruh data medianya.
+    public function destroy($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $album = AlbumGaleri::with('media')
+                ->findOrFail($id);
+
+            $fileUntukDihapus = [];
+
+            foreach ($album->media as $media) {
+                if (
+                    $media->file &&
+                    !Str::startsWith(
+                        $media->file,
+                        ['http://', 'https://']
+                    )
+                ) {
+                    $fileUntukDihapus[] = $media->file;
+                }
+            }
+
+            // Foreign key cascade menghapus data media terkait.
+            $album->delete();
+
+            // Hapus file fisik, bukan link video.
+            foreach (array_unique($fileUntukDihapus) as $path) {
+                Storage::disk('public')->delete($path);
+            }
+
+            return redirect()
+                ->route('admin.galeri.index')
+                ->with('success', 'Album berhasil dihapus.');
+        } catch (\Exception $e) {
+            report($e);
+
+            return redirect()
+                ->route('admin.galeri.index')
+                ->with('error', 'Album gagal dihapus.');
+        }
+    }
+
+    // Menampilkan seluruh album di halaman publik.
+    public function publicGaleri()
+    {
+        $galeri = AlbumGaleri::with([
+            'media' => function ($query) {
+                $query->orderBy('id_media', 'asc');
+            },
+        ])
+            ->withCount('media')
+            ->orderBy('tanggal', 'desc')
+            ->paginate(12);
+
+        return view('public.galeri', compact('galeri'));
+    }
+
+    // Detail album di halaman publik.
+    public function publicShow($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $album = AlbumGaleri::with('media')
+                ->findOrFail($id);
+
+            return view('public.galeri.show', compact('album'));
+        } catch (\Exception $e) {
+            abort(404);
+        }
+    }
+}

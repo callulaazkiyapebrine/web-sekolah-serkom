@@ -1,0 +1,340 @@
+
+/* ========================================
+   PERAPIAN SEMUA TABEL ADMIN
+======================================== */
+
+/* LEBAR TABEL DAN POSISI KOLOM */
+#dataUser_wrapper #dataUser,
+#dataEskul_wrapper #dataEskul,
+#dataPrestasi_wrapper #dataPrestasi,
+#dataBerita_wrapper #dataBerita,
+#dataGuru_wrapper #dataGuru,
+#dataSiswa_wrapper #dataSiswa,
+#dataGaleri_wrapper #dataGaleri {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* SEMUA JUDUL DAN ISI KOLOM */
+#dataUser_wrapper #dataUser th,
+#dataUser_wrapper #dataUser td,
+#dataEskul_wrapper #dataEskul th,
+#dataEskul_wrapper #dataEskul td,
+#dataPrestasi_wrapper #dataPrestasi th,
+#dataPrestasi_wrapper #dataPrestasi td,
+#dataBerita_wrapper #dataBerita th,
+#dataBerita_wrapper #dataBerita td,
+#dataGuru_wrapper #dataGuru th,
+#dataGuru_wrapper #dataGuru td,
+#dataSiswa_wrapper #dataSiswa th,
+#dataSiswa_wrapper #dataSiswa td,
+#dataGaleri_wrapper #dataGaleri th,
+#dataGaleri_wrapper #dataGaleri td {
+    box-sizing: border-box;
+    vertical-align: middle !important;
+}
+
+/* TEKS PANJANG TIDAK MERUSAK LEBAR KOLOM */
+#dataEskul tbody td,
+#dataPrestasi tbody td,
+#dataBerita tbody td,
+#dataGaleri tbody td {
+    overflow-wrap: anywhere;
+}
+
+/* TOMBOL AKSI TETAP RAPI */
+#dataUser tbody td:last-child,
+#dataEskul tbody td:last-child,
+#dataPrestasi tbody td:last-child,
+#dataBerita tbody td:last-child,
+#dataGuru tbody td:last-child,
+#dataSiswa tbody td:last-child,
+#dataGaleri tbody td:last-child {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* ========================================
+   DATA USER — 4 KOLOM
+======================================== */
+#dataUser_wrapper #dataUser th:nth-child(1),
+#dataUser_wrapper #dataUser td:nth-child(1) {
+    width: 8% !important;
+    text-align: center;
+}
+
+#dataUser_wrapper #dataUser th:nth-child(2),
+#dataUser_wrapper #dataUser td:nth-child(2) {
+    width: 42% !important;
+    text-align: left;
+}
+
+#dataUser_wrapper #dataUser th:nth-child(3),
+#dataUser_wrapper #dataUser td:nth-child(3) {
+    width: 20% !important;
+}
+
+#dataUser_wrapper #dataUser th:nth-child(4),
+#dataUser_wrapper #dataUser td:nth-child(4) {
+    width: 30% !important;
+}
+
+/* ========================================
+   DATA EKSTRAKURIKULER — 7 KOLOM
+======================================== */
+#dataEskul_wrapper #dataEskul th:nth-child(1),
+#dataEskul_wrapper #dataEskul td:nth-child(1) {
+    width: 6% !important;
+    text-align: center;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(2),
+#dataEskul_wrapper #dataEskul td:nth-child(2) {
+    width: 20% !important;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(3),
+#dataEskul_wrapper #dataEskul td:nth-child(3) {
+    width: 14% !important;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(4),
+#dataEskul_wrapper #dataEskul td:nth-child(4) {
+    width: 15% !important;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(5),
+#dataEskul_wrapper #dataEskul td:nth-child(5) {
+    width: 23% !important;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(6),
+#dataEskul_wrapper #dataEskul td:nth-child(6) {
+    width: 10% !important;
+    text-align: center;
+}
+
+#dataEskul_wrapper #dataEskul th:nth-child(7),
+#dataEskul_wrapper #dataEskul td:nth-child(7) {
+    width: 12% !important;
+    text-align: center;
+}
+
+/* ========================================
+   DATA PRESTASI — 7 KOLOM
+======================================== */
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(1),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(1) {
+    width: 6% !important;
+    text-align: center;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(2),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(2) {
+    width: 22% !important;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(3),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(3) {
+    width: 18% !important;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(4),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(4) {
+    width: 23% !important;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(5),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(5) {
+    width: 13% !important;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(6),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(6) {
+    width: 8% !important;
+    text-align: center;
+}
+
+#dataPrestasi_wrapper #dataPrestasi th:nth-child(7),
+#dataPrestasi_wrapper #dataPrestasi td:nth-child(7) {
+    width: 10% !important;
+    text-align: center;
+}
+
+/* ========================================
+   DATA BERITA — 8 KOLOM
+======================================== */
+#dataBerita_wrapper #dataBerita th:nth-child(1),
+#dataBerita_wrapper #dataBerita td:nth-child(1) {
+    width: 5% !important;
+    text-align: center;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(2),
+#dataBerita_wrapper #dataBerita td:nth-child(2) {
+    width: 18% !important;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(3),
+#dataBerita_wrapper #dataBerita td:nth-child(3) {
+    width: 25% !important;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(4),
+#dataBerita_wrapper #dataBerita td:nth-child(4) {
+    width: 12% !important;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(5),
+#dataBerita_wrapper #dataBerita td:nth-child(5) {
+    width: 10% !important;
+    text-align: center;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(6),
+#dataBerita_wrapper #dataBerita td:nth-child(6) {
+    width: 9% !important;
+    text-align: center;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(7),
+#dataBerita_wrapper #dataBerita td:nth-child(7) {
+    width: 11% !important;
+}
+
+#dataBerita_wrapper #dataBerita th:nth-child(8),
+#dataBerita_wrapper #dataBerita td:nth-child(8) {
+    width: 10% !important;
+    text-align: center;
+}
+
+/* ========================================
+   DATA GURU — 6 KOLOM
+======================================== */
+#dataGuru_wrapper #dataGuru th:nth-child(1),
+#dataGuru_wrapper #dataGuru td:nth-child(1) {
+    width: 8% !important;
+    text-align: center;
+}
+
+#dataGuru_wrapper #dataGuru th:nth-child(2),
+#dataGuru_wrapper #dataGuru td:nth-child(2) {
+    width: 24% !important;
+}
+
+#dataGuru_wrapper #dataGuru th:nth-child(3),
+#dataGuru_wrapper #dataGuru td:nth-child(3) {
+    width: 18% !important;
+}
+
+#dataGuru_wrapper #dataGuru th:nth-child(4),
+#dataGuru_wrapper #dataGuru td:nth-child(4) {
+    width: 25% !important;
+}
+
+#dataGuru_wrapper #dataGuru th:nth-child(5),
+#dataGuru_wrapper #dataGuru td:nth-child(5) {
+    width: 12% !important;
+    text-align: center;
+}
+
+#dataGuru_wrapper #dataGuru th:nth-child(6),
+#dataGuru_wrapper #dataGuru td:nth-child(6) {
+    width: 13% !important;
+    text-align: center;
+}
+
+/* ========================================
+   DATA SISWA — 6 KOLOM
+======================================== */
+#dataSiswa_wrapper #dataSiswa th:nth-child(1),
+#dataSiswa_wrapper #dataSiswa td:nth-child(1) {
+    width: 7% !important;
+    text-align: center;
+}
+
+#dataSiswa_wrapper #dataSiswa th:nth-child(2),
+#dataSiswa_wrapper #dataSiswa td:nth-child(2) {
+    width: 16% !important;
+}
+
+#dataSiswa_wrapper #dataSiswa th:nth-child(3),
+#dataSiswa_wrapper #dataSiswa td:nth-child(3) {
+    width: 27% !important;
+}
+
+#dataSiswa_wrapper #dataSiswa th:nth-child(4),
+#dataSiswa_wrapper #dataSiswa td:nth-child(4) {
+    width: 17% !important;
+    text-align: center;
+}
+
+#dataSiswa_wrapper #dataSiswa th:nth-child(5),
+#dataSiswa_wrapper #dataSiswa td:nth-child(5) {
+    width: 15% !important;
+}
+
+#dataSiswa_wrapper #dataSiswa th:nth-child(6),
+#dataSiswa_wrapper #dataSiswa td:nth-child(6) {
+    width: 18% !important;
+    text-align: center;
+}
+
+/* ========================================
+   DATA GALERI — 7 KOLOM
+======================================== */
+#dataGaleri_wrapper #dataGaleri th:nth-child(1),
+#dataGaleri_wrapper #dataGaleri td:nth-child(1) {
+    width: 6% !important;
+    text-align: center;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(2),
+#dataGaleri_wrapper #dataGaleri td:nth-child(2) {
+    width: 18% !important;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(3),
+#dataGaleri_wrapper #dataGaleri td:nth-child(3) {
+    width: 24% !important;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(4),
+#dataGaleri_wrapper #dataGaleri td:nth-child(4) {
+    width: 12% !important;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(5),
+#dataGaleri_wrapper #dataGaleri td:nth-child(5) {
+    width: 13% !important;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(6),
+#dataGaleri_wrapper #dataGaleri td:nth-child(6) {
+    width: 15% !important;
+    text-align: center;
+}
+
+#dataGaleri_wrapper #dataGaleri th:nth-child(7),
+#dataGaleri_wrapper #dataGaleri td:nth-child(7) {
+    width: 12% !important;
+    text-align: center;
+}
+
+/* TABEL LEBAR DI LAYAR KECIL */
+@media (max-width: 768px) {
+    #dataEskul_wrapper #dataEskul,
+    #dataPrestasi_wrapper #dataPrestasi,
+    #dataBerita_wrapper #dataBerita,
+    #dataGuru_wrapper #dataGuru,
+    #dataSiswa_wrapper #dataSiswa,
+    #dataGaleri_wrapper #dataGaleri {
+        min-width: 850px;
+    }
+
+    #dataUser_wrapper #dataUser {
+        min-width: 600px;
+    }
+}

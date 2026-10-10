@@ -1,0 +1,110 @@
+.navbar {
+    background: #ffffff;
+    min-height: 92px;
+    padding: 10px 45px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-right: 80px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
+.navbar-school-name {
+    color: #198754;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 650;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.navbar-nav {
+    align-items: center;
+    gap: 4px;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #374151;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 13px 16px !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #006b3c;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 2px;
+    height: 3px;
+    background: #006b3c;
+    border-radius: 20px;
+}
+
+.btn-ppdb {
+    background: #006b3c;
+    color: white;
+    border: none;
+    padding: 12px 27px;
+    border-radius: 9px;
+    font-weight: 600;
+    margin-left: 25px;
+}
+
+.btn-ppdb:hover {
+    background: #00552f;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-nav {
+        align-items: flex-start;
+    }
+
+    .navbar-nav .nav-link {
+        width: 100%;
+        padding: 11px 5px !important;
+    }
+
+    .navbar-nav .nav-link.active::after {
+        left: 5px;
+        right: auto;
+        width: 38px;
+    }
+
+    .btn-ppdb {
+        margin-left: 0;
+        margin-top: 12px;
+    }
+}

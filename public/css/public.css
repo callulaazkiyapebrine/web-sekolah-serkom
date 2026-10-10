@@ -1,0 +1,3520 @@
+/* =====================================================
+           GLOBAL
+        ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+    background: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+           NAVBAR
+        ===================================================== */
+.navbar {
+    background: #ffffff;
+    min-height: 92px;
+    padding: 10px 45px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-right: 80px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
+.navbar-school-name {
+    color: #198754;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 650;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.navbar-nav {
+    align-items: center;
+    gap: 4px;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #374151;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 13px 16px !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #006b3c;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 2px;
+    height: 3px;
+    background: #006b3c;
+    border-radius: 20px;
+}
+
+@media (max-width: 991px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-nav {
+        align-items: flex-start;
+    }
+
+    .navbar-nav .nav-link {
+        width: 100%;
+        padding: 11px 5px !important;
+    }
+
+    .navbar-nav .nav-link.active::after {
+        left: 5px;
+        right: auto;
+        width: 38px;
+    }
+
+    .btn-ppdb {
+        margin-left: 0;
+        margin-top: 12px;
+    }
+}
+
+/* =====================================================
+           DROPDOWN
+        ===================================================== */
+
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+
+    padding: 8px;
+
+    margin-top: 10px !important;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown-item {
+    color: #374151;
+
+    font-size: 15px;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: #e8f5ee;
+    color: #006b3c;
+}
+
+.dropdown-item.active {
+    background: #e8f5ee;
+    color: #006b3c;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+           BUTTON PPDB
+        ===================================================== */
+
+.btn-ppdb {
+    background: #006b3c;
+    color: #ffffff;
+
+    border: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 12px 27px;
+
+    border-radius: 9px;
+
+    margin-left: 25px;
+
+    transition: all 0.25s ease;
+}
+
+.btn-ppdb:hover {
+    background: #00552f;
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0, 107, 60, 0.20);
+}
+
+
+/* =====================================================
+   CAROUSEL
+====================================================== */
+
+#carouselExampleFade {
+    width: 100%;
+}
+
+#carouselExampleFade .carousel-item {
+    height: 520px;
+}
+
+#carouselExampleFade .carousel-item img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+}
+
+/* =====================================================
+   OVERLAY FOTO
+====================================================== */
+
+#carouselExampleFade .carousel-item::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(to bottom,
+            rgba(0, 70, 40, 0.15),
+            rgba(0, 70, 40, 0.55));
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   ISI CAROUSEL
+====================================================== */
+
+#carouselExampleFade .carousel-caption {
+    z-index: 2;
+
+    bottom: 23%;
+
+    left: 13%;
+    right: 10%;
+}
+
+
+/* =====================================================
+   JUDUL SEKOLAH
+====================================================== */
+
+#carouselExampleFade .carousel-caption h1 {
+    font-size: 52px;
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
+    letter-spacing: 1px;
+    line-height: 1.1;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ===================================================== 
+   SLOGAN UTAMA
+====================================================== */
+
+#carouselExampleFade .carousel-caption h2 {
+    font-size: 24px;
+    font-weight: 600;
+
+    margin: 0;
+
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+
+/* ===================================================== 
+   SLOGAN TAMBAHAN
+====================================================== */
+
+#carouselExampleFade .carousel-caption p {
+    margin-top: -10px;
+    margin-bottom: 10px;
+
+    font-size: 15px;
+    font-weight: 400;
+
+    line-height: 1.7;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+
+/* =====================================================
+   TAGLINE
+====================================================== */
+
+#carouselExampleFade .carousel-caption h2 {
+    font-size: 25px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   DESKRIPSI
+====================================================== */
+
+#carouselExampleFade .carousel-caption p {
+    margin-bottom: 5px;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   STATISTIK SEKOLAH
+====================================================== */
+
+.school-stats {
+    position: relative;
+
+    background: #ffffff;
+
+    /* jarak atas dan bawah */
+    padding: 55px 0 55px;
+
+    z-index: 5;
+}
+
+
+.school-stats-wrapper {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    max-width: 950px;
+
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eee9;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(25, 135, 84, 0.08);
+
+    padding: 22px 10px;
+}
+
+
+/* ITEM STATISTIK */
+
+.school-stat {
+    position: relative;
+
+    flex: 1;
+
+    text-align: center;
+
+    padding: 5px 20px;
+}
+
+
+/* GARIS PEMISAH */
+
+.school-stat:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 5px;
+
+    width: 1px;
+    height: 45px;
+
+    background: #dfe9e3;
+}
+
+
+/* ANGKA */
+
+.school-stat strong {
+    display: block;
+
+    color: #198754;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+
+/* LABEL */
+
+.school-stat span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+}
+
+
+/* =====================================================
+   TABLET
+====================================================== */
+
+@media (max-width: 991px) {
+
+    #carouselExampleFade .carousel-item,
+    #carouselExampleFade .carousel-item img {
+        height: 580px;
+    }
+
+    #carouselExampleFade .carousel-caption {
+        bottom: 12%;
+    }
+
+    #carouselExampleFade .carousel-caption h1 {
+        font-size: 42px;
+    }
+
+    #carouselExampleFade .carousel-caption h2 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET STATISTIK
+====================================================== */
+
+@media (max-width: 768px) {
+
+    .school-stats {
+        padding: 20px 0 15px;
+    }
+
+    .school-stats-wrapper {
+        max-width: 95%;
+    }
+
+    .school-stat {
+        padding: 5px 10px;
+    }
+
+    .school-stat strong {
+        font-size: 24px;
+    }
+
+    .school-stat span {
+        font-size: 10px;
+    }
+
+}
+
+
+/* =====================================================
+   HP
+====================================================== */
+
+@media (max-width: 576px) {
+
+    #carouselExampleFade .carousel-item,
+    #carouselExampleFade .carousel-item img {
+        height: 520px;
+    }
+
+    #carouselExampleFade .carousel-caption {
+
+        bottom: 9%;
+
+        left: 5%;
+        right: 5%;
+    }
+
+    #carouselExampleFade .carousel-caption h1 {
+        font-size: 29px;
+    }
+
+    #carouselExampleFade .carousel-caption h2 {
+        font-size: 16px;
+
+        letter-spacing: 1px;
+    }
+
+    #carouselExampleFade .carousel-caption p {
+        font-size: 13px;
+    }
+
+
+    /* =================================================
+       STATISTIK HP
+    ================================================= */
+
+    .school-stats-wrapper {
+        max-width: 95%;
+
+        padding: 12px 3px;
+
+        border-radius: 12px;
+    }
+
+    .school-stat {
+        padding: 4px 3px;
+    }
+
+    .school-stat:not(:last-child)::after {
+        height: 35px;
+    }
+
+    .school-stat strong {
+        font-size: 18px;
+    }
+
+    .school-stat span {
+        margin-top: 4px;
+
+        font-size: 7px;
+
+        letter-spacing: .2px;
+    }
+
+}
+
+/* =====================================================
+           SAMBUTAN KEPALA SEKOLAH
+        ===================================================== */
+
+.sambutan-section {
+    padding: 85px 0;
+
+    background: #ffffff;
+}
+
+
+/* FOTO */
+
+.sambutan-foto {
+    width: 100%;
+    max-width: 390px;
+
+    margin: auto;
+
+    position: relative;
+}
+
+.sambutan-foto img {
+    width: 100%;
+    height: 440px;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.13);
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* AKSEN FOTO */
+
+.sambutan-foto::before {
+    content: "";
+
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    left: -12px;
+    bottom: -12px;
+
+    background: #006b3c;
+
+    border-radius: 15px;
+
+    z-index: 0;
+}
+
+
+/* TEKS */
+
+.sambutan-text {
+    padding-left: 15px;
+}
+
+.sambutan-label {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #006b3c;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+}
+
+.sambutan-text h2 {
+    margin: 0 0 13px;
+
+    color: #1f2937;
+
+    font-size: 36px;
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+/* GARIS */
+
+.garis-hijau {
+    width: 58px;
+    height: 4px;
+
+    margin-bottom: 25px;
+
+    background: #006b3c;
+
+    border-radius: 20px;
+}
+
+
+/* PARAGRAF */
+
+.sambutan-text p {
+    margin-bottom: 15px;
+
+    color: #6b7280;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* NAMA KEPALA SEKOLAH */
+
+.kepala-nama {
+    margin-top: 27px;
+
+    padding-left: 15px;
+
+    border-left: 4px solid #006b3c;
+}
+
+.kepala-nama h4 {
+    margin: 0 0 4px;
+
+    color: #006b3c;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.kepala-nama span {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+           VISI & MISI
+        ===================================================== */
+
+.visi-misi-section {
+    padding: 80px 0;
+    background-color: #f8faf9;
+}
+
+.visi-misi-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.visi-misi-label {
+    display: inline-block;
+    color: #006b3c;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.visi-misi-header h2 {
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.visi-misi-header p {
+    color: #6b7280;
+    font-size: 16px;
+    margin: 0 auto;
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+
+/* KARTU */
+
+.visi-misi-card {
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 35px;
+    border: 1px solid #e5eee9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.visi-misi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, 0.10);
+}
+
+
+/* JUDUL KARTU */
+
+.visi-misi-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.visi-misi-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background-color: #e8f5ee;
+    color: #006b3c;
+
+    border-radius: 12px;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.visi-misi-title h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* VISI */
+
+.visi-text {
+    color: #6b7280;
+    font-size: 17px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+
+/* MISI */
+
+.misi-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.misi-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 18px;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.misi-list li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+/* =====================================================
+           KEUNGGULAN SEKOLAH
+        ===================================================== */
+
+.keunggulan-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+.keunggulan-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.keunggulan-label {
+    display: inline-block;
+    color: #006b3c;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.keunggulan-header h2 {
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.keunggulan-header p {
+    color: #6b7280;
+    font-size: 16px;
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+
+/* KARTU */
+
+.keunggulan-card {
+    height: 100%;
+    padding: 35px 28px;
+    background-color: #ffffff;
+
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.3s ease;
+}
+
+.keunggulan-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 107, 60, 0.12);
+
+    border-color: #b9dcc9;
+}
+
+
+/* ICON */
+
+.keunggulan-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #e8f5ee;
+
+    color: #006b3c;
+
+    border-radius: 16px;
+
+    font-size: 28px;
+}
+
+
+/* JUDUL */
+
+.keunggulan-card h3 {
+    color: #1f2937;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+
+/* DESKRIPSI */
+
+.keunggulan-card p {
+    color: #6b7280;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   GURU & STAF
+===================================================== */
+
+.guru-section {
+    padding: 80px 0;
+    background: #f8faf9;
+}
+
+/* HEADER */
+.guru-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.guru-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #006b3c;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.guru-header h2 {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.guru-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* KARTU GURU */
+.guru-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guru-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, 0.12);
+}
+
+/* FOTO GURU */
+.guru-foto {
+    width: 100%;
+    height: 280px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #e8f5ee;
+}
+
+.guru-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.4s ease;
+}
+
+.guru-card:hover .guru-foto img {
+    transform: scale(1.04);
+}
+
+/* INFORMASI GURU */
+.guru-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px 18px;
+    text-align: center;
+}
+
+/* NAMA GURU */
+.guru-info h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 54px;
+    margin: 0 0 8px;
+    color: #1f2937;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* MAPEL / JABATAN */
+.guru-info p {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    min-height: 42px;
+    margin: 0 0 18px;
+    color: #006b3c;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* TOMBOL LIHAT SEMUA GURU */
+.guru-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.guru-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    background: #198754;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.guru-more .btn:hover {
+    background: #146c43;
+    border-color: #146c43;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.18);
+}
+
+.guru-more .btn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.guru-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* TOMBOL DETAIL SEJAJAR */
+.guru-info .btn {
+    margin-top: auto;
+    padding: 8px 18px;
+    border-radius: 8px;
+    background-color: #006b3c;
+    border-color: #006b3c;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.guru-info .btn:hover {
+    background-color: #00552f;
+    border-color: #00552f;
+}
+
+/* DATA GURU KOSONG */
+.guru-kosong {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #b9dcc9;
+    border-radius: 18px;
+}
+
+.guru-kosong .icon {
+    margin-bottom: 15px;
+    color: #006b3c;
+    font-size: 45px;
+}
+
+.guru-kosong h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+    font-size: 22px;
+}
+
+.guru-kosong p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* TABLET */
+@media (max-width: 991.98px) {
+    .guru-section {
+        padding: 65px 0;
+    }
+
+    .guru-header h2 {
+        font-size: 30px;
+    }
+
+    .guru-foto {
+        height: 250px;
+    }
+
+    .guru-info {
+        padding: 20px 14px;
+    }
+}
+
+/* HP */
+@media (max-width: 575.98px) {
+    .guru-section {
+        padding: 50px 0;
+    }
+
+    .guru-header {
+        margin-bottom: 30px;
+    }
+
+    .guru-header h2 {
+        font-size: 25px;
+    }
+
+    .guru-header p {
+        font-size: 14px;
+    }
+
+    .guru-foto {
+        height: 210px;
+    }
+
+    .guru-info {
+        padding: 16px 10px;
+    }
+
+    .guru-info h3 {
+        min-height: 48px;
+        font-size: 14px;
+    }
+
+    .guru-info p {
+        min-height: 42px;
+        font-size: 12px;
+    }
+
+    .guru-info .btn {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+}
+
+
+
+/* =====================================================
+           MOBILE NAVBAR
+        ===================================================== */
+
+.navbar-toggler {
+    border: 1px solid #006b3c;
+
+    padding: 7px 10px;
+
+    border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+    box-shadow:
+        0 0 0 0.15rem rgba(0, 107, 60, 0.15);
+}
+
+
+/* ICON HAMBURGER */
+
+.navbar-toggler-icon {
+    width: 1.25em;
+    height: 1.25em;
+
+    background-image: none !important;
+
+    position: relative;
+
+    display: inline-block;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon {
+    border-radius: 2px;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #006b3c;
+}
+
+.navbar-toggler-icon::before {
+    top: 4px;
+}
+
+.navbar-toggler-icon::after {
+    bottom: 4px;
+}
+
+
+/* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+@media (max-width: 991px) {
+
+    .navbar {
+        padding: 10px 20px;
+        min-height: 82px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-brand img {
+        height: 62px;
+    }
+
+
+    /* MENU MOBILE */
+
+    .navbar-collapse {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-nav {
+        align-items: flex-start;
+
+        gap: 0;
+
+        margin-top: 5px;
+    }
+
+    .navbar-nav .nav-link {
+        width: 100%;
+
+        padding: 11px 5px !important;
+    }
+
+    .navbar-nav .nav-link.active::after {
+        left: 5px;
+        right: auto;
+
+        width: 38px;
+    }
+
+
+    /* DROPDOWN */
+
+    .dropdown-menu {
+        width: 100%;
+
+        margin-top: 0 !important;
+
+        box-shadow: none;
+
+        border-left: 3px solid #006b3c;
+
+        border-radius: 0 8px 8px 0;
+    }
+
+    .dropdown-item {
+        padding-left: 15px;
+    }
+
+
+    /* PPDB */
+
+    .btn-ppdb {
+        display: inline-block;
+
+        margin-left: 0;
+        margin-top: 12px;
+    }
+
+
+    /* CAROUSEL */
+
+    .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-item img {
+        height: 400px;
+    }
+
+    .carousel-caption {
+        width: 82%;
+    }
+
+    .carousel-caption h1 {
+        font-size: 32px;
+
+        letter-spacing: 1px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 20px;
+
+        letter-spacing: 1px;
+    }
+
+    .carousel-caption h2::after {
+        width: 50px;
+        height: 3px;
+
+        margin: 13px auto 16px;
+    }
+
+    .carousel-caption p {
+        font-size: 14px;
+
+        margin: 5px 0;
+    }
+
+
+    /* SAMBUTAN */
+
+    .sambutan-section {
+        padding: 60px 0;
+    }
+
+    .sambutan-foto {
+        max-width: 330px;
+    }
+
+    .sambutan-foto img {
+        height: 380px;
+    }
+
+    .sambutan-text {
+        padding-left: 0;
+
+        margin-top: 15px;
+
+        text-align: center;
+    }
+
+    .sambutan-text h2 {
+        font-size: 29px;
+    }
+
+    .garis-hijau {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sambutan-text p {
+        font-size: 15px;
+    }
+
+    .kepala-nama {
+        text-align: left;
+
+        max-width: 300px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* VISI MISI */
+
+    .visi-misi-section {
+        padding: 55px 0;
+    }
+
+    .visi-misi-header h2 {
+        font-size: 29px;
+    }
+
+    .visi-misi-card {
+        padding: 28px;
+    }
+
+
+    /* KEUNGGULAN */
+
+    .keunggulan-section {
+        padding: 55px 0;
+    }
+
+    .keunggulan-header h2 {
+        font-size: 29px;
+    }
+
+
+    /* GURU */
+
+    .guru-section {
+        padding: 55px 0;
+    }
+
+    .guru-header h2 {
+        font-size: 29px;
+    }
+
+    .guru-foto {
+        height: 300px;
+    }
+
+}
+
+
+/* =====================================================
+           MOBILE KECIL
+        ===================================================== */
+
+@media (max-width: 576px) {
+
+    .navbar {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar-brand img {
+        height: 55px;
+    }
+
+    .carousel-item {
+        height: 360px;
+    }
+
+    .carousel-item img {
+        height: 360px;
+    }
+
+    .carousel-caption {
+        width: 78%;
+    }
+
+    .carousel-caption h1 {
+        font-size: 26px;
+        letter-spacing: 0.5px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 17px;
+        letter-spacing: 0.5px;
+    }
+
+    .carousel-caption p {
+        font-size: 13px;
+    }
+
+    .sambutan-foto img {
+        height: 350px;
+    }
+
+    .sambutan-text h2 {
+        font-size: 26px;
+    }
+
+    .visi-misi-header h2,
+    .keunggulan-header h2,
+    .guru-header h2 {
+        font-size: 26px;
+    }
+
+    .visi-misi-card {
+        padding: 22px;
+    }
+
+    .visi-misi-title h3 {
+        font-size: 21px;
+    }
+
+    .visi-text {
+        font-size: 15px;
+    }
+
+    .misi-list li {
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .misi-number {
+        min-width: 32px;
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .keunggulan-card {
+        padding: 30px 22px;
+    }
+
+    .guru-foto {
+        height: 280px;
+    }
+
+}
+
+
+/* =====================================================
+   PRESTASI SEKOLAH
+====================================================== */
+
+.prestasi-section {
+    padding: 80px 0;
+    background: #f5f8f6;
+}
+
+.prestasi-header {
+    max-width: 700px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.prestasi-header .label {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #198754;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.prestasi-header h2 {
+    margin-bottom: 15px;
+    color: #173b2b;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.prestasi-header p {
+    margin-bottom: 0;
+    color: #6b7c72;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.prestasi-card {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e1ebe4;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prestasi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 80, 40, 0.10);
+}
+
+.prestasi-foto {
+    height: 220px;
+    overflow: hidden;
+    background: #eaf3ed;
+}
+
+.prestasi-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.prestasi-card:hover .prestasi-foto img {
+    transform: scale(1.04);
+}
+
+.prestasi-no-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    color: #198754;
+    font-size: 42px;
+}
+
+.prestasi-no-foto span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.prestasi-info {
+    padding: 22px;
+}
+
+.prestasi-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+    color: #198754;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.prestasi-info h3 {
+    margin-bottom: 15px;
+    color: #24382c;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.prestasi-info p,
+.prestasi-info small {
+    display: block;
+    margin-bottom: 8px;
+    color: #718078;
+    font-size: 13px;
+}
+
+.prestasi-more {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.prestasi-more .btn {
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 8px;
+    color: #198754;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.prestasi-more .btn:hover {
+    background: #198754;
+    color: #fff;
+}
+
+.prestasi-more .btn span {
+    margin-left: 8px;
+}
+
+.prestasi-kosong {
+    padding: 45px 20px;
+    border: 1px dashed #cbdcd0;
+    border-radius: 16px;
+    background: #fff;
+    text-align: center;
+}
+
+.prestasi-kosong .icon {
+    margin-bottom: 12px;
+    font-size: 38px;
+}
+
+.prestasi-kosong h3 {
+    color: #244331;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.prestasi-kosong p {
+    margin-bottom: 0;
+    color: #718078;
+    font-size: 14px;
+}
+
+@media (max-width: 576px) {
+    .prestasi-section {
+        padding: 55px 0;
+    }
+
+    .prestasi-header h2 {
+        font-size: 26px;
+    }
+
+    .prestasi-foto {
+        height: 190px;
+    }
+
+    .prestasi-info {
+        padding: 18px;
+    }
+}
+
+
+/* =====================================================
+   BERITA
+====================================================== */
+
+.berita-section {
+    padding: 80px 0;
+    background: #f8faf9;
+}
+
+/* HEADER */
+
+.berita-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.berita-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #006b3c;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.berita-header h2 {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.berita-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* CARD */
+
+.berita-section .row {
+    align-items: stretch;
+}
+
+.berita-section .row > [class*="col-"] {
+    display: flex;
+}
+
+.berita-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.berita-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, 0.12);
+}
+
+/* FOTO */
+
+.berita-foto {
+    width: 100%;
+    height: 230px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #e8f5ee;
+}
+
+.berita-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.berita-card:hover .berita-foto img {
+    transform: scale(1.05);
+}
+
+/* TIDAK ADA FOTO */
+
+.berita-no-foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* INFORMASI */
+
+.berita-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 22px;
+}
+
+.berita-tanggal {
+    margin-bottom: 8px;
+    color: #198754;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.berita-info h3 {
+    margin: 0 0 10px;
+    color: #1f2937;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.berita-info p {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* BUTTON BACA SELENGKAPNYA */
+
+.berita-info .btn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 8px 14px;
+    border: 1px solid #006b3c;
+    border-radius: 8px;
+    background-color: #006b3c;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.berita-info .btn:hover {
+    background-color: #00552f;
+    border-color: #00552f;
+    color: #ffffff;
+}
+
+/* TOMBOL LIHAT SEMUA BERITA */
+
+.berita-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.berita-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    background-color: #198754;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.berita-more .btn:hover {
+    transform: translateY(-2px);
+    background-color: #146c43;
+    border-color: #146c43;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.18);
+}
+
+.berita-more .btn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.berita-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* DATA KOSONG */
+
+.berita-kosong {
+    padding: 60px 20px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #b9dcc9;
+    border-radius: 18px;
+}
+
+.berita-kosong .icon {
+    margin-bottom: 15px;
+    font-size: 45px;
+}
+
+.berita-kosong h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+    font-size: 22px;
+}
+
+.berita-kosong p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* =====================================================
+   RESPONSIVE BERITA
+====================================================== */
+
+@media (max-width: 991px) {
+    .berita-section {
+        padding: 55px 0;
+    }
+
+    .berita-header h2 {
+        font-size: 29px;
+    }
+
+    .berita-foto {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .berita-header h2 {
+        font-size: 26px;
+    }
+
+    .berita-header p {
+        font-size: 15px;
+    }
+
+    .berita-foto {
+        height: 230px;
+    }
+
+    .berita-info {
+        padding: 20px;
+    }
+}
+
+
+/* =====================================================
+   PRESTASI
+====================================================== */
+
+.prestasi-section {
+    padding: 80px 0;
+    background: #f8faf9;
+}
+
+/* HEADER */
+
+.prestasi-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.prestasi-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #006b3c;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.prestasi-header h2 {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.prestasi-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* CARD */
+
+.prestasi-card {
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.prestasi-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, 0.12);
+}
+
+/* FOTO */
+
+.prestasi-foto {
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    background: #e8f5ee;
+}
+
+.prestasi-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.prestasi-card:hover .prestasi-foto img {
+    transform: scale(1.05);
+}
+
+/* FOTO KOSONG */
+
+.prestasi-no-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.prestasi-no-foto i {
+    color: #198754;
+    font-size: 40px;
+}
+
+/* INFORMASI */
+
+.prestasi-info {
+    padding: 22px;
+}
+
+.prestasi-tanggal {
+    margin-bottom: 8px;
+    color: #198754;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.prestasi-info h3 {
+    margin: 0 0 10px;
+    color: #1f2937;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.prestasi-info p {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* TOMBOL DETAIL */
+
+.btn-detail-prestasi {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid #198754;
+    border-radius: 8px;
+    background: #198754;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-detail-prestasi:hover {
+    background: #146c43;
+    border-color: #146c43;
+    color: #fff;
+}
+
+.btn-detail-prestasi i {
+    transition: transform 0.3s ease;
+}
+
+.btn-detail-prestasi:hover i {
+    transform: translateX(4px);
+}
+
+/* TOMBOL SEMUA PRESTASI */
+
+.prestasi-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.prestasi-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    background: #198754;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.prestasi-more .btn:hover {
+    background: #146c43;
+    border-color: #146c43;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.18);
+}
+
+.prestasi-more .btn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.prestasi-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* DATA KOSONG */
+
+.prestasi-kosong {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #b9dcc9;
+    border-radius: 18px;
+}
+
+.prestasi-kosong .icon {
+    margin-bottom: 15px;
+    color: #198754;
+    font-size: 45px;
+}
+
+.prestasi-kosong h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+    font-size: 22px;
+}
+
+.prestasi-kosong p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 991px) {
+    .prestasi-section {
+        padding: 55px 0;
+    }
+
+    .prestasi-header h2 {
+        font-size: 29px;
+    }
+
+    .prestasi-foto {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .prestasi-header h2 {
+        font-size: 26px;
+    }
+
+    .prestasi-header p {
+        font-size: 15px;
+    }
+
+    .prestasi-foto {
+        height: 280px;
+    }
+
+    .prestasi-info {
+        padding: 20px;
+    }
+}
+
+/* =====================================================
+   PENGUMUMAN
+====================================================== */
+
+.pengumuman-section {
+    padding: 80px 0;
+    background: #f8faf9;
+}
+
+.pengumuman-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.pengumuman-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #006b3c;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.pengumuman-header h2 {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.pengumuman-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* CARD */
+
+.pengumuman-card {
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.pengumuman-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, 0.12);
+}
+
+
+/* AREA IKON */
+
+.pengumuman-foto {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e8f5ee, #d2eadb);
+}
+
+.pengumuman-icon {
+    width: 78px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #006b3c;
+    background: #ffffff;
+    border-radius: 22px;
+    font-size: 38px;
+    box-shadow: 0 8px 25px rgba(0, 107, 60, 0.10);
+    transition: transform 0.3s ease;
+}
+
+.pengumuman-card:hover .pengumuman-icon {
+    transform: scale(1.08);
+}
+
+
+/* INFORMASI */
+
+.pengumuman-info {
+    padding: 22px;
+}
+
+.pengumuman-tanggal {
+    margin-bottom: 8px;
+    color: #198754;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pengumuman-info h3 {
+    margin: 0 0 10px;
+    color: #1f2937;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.pengumuman-info p {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* BUTTON BACA SELENGKAPNYA */
+
+.pengumuman-info .btn {
+    border-radius: 8px;
+    background-color: #006b3c;
+    border-color: #006b3c;
+}
+
+.pengumuman-info .btn:hover {
+    background-color: #00552f;
+    border-color: #00552f;
+}
+
+
+/* TOMBOL LIHAT SEMUA */
+
+.pengumuman-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pengumuman-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    background-color: #198754;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pengumuman-more .btn:hover {
+    background-color: #146c43;
+    border-color: #146c43;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.18);
+}
+
+.pengumuman-more .btn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.pengumuman-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+
+/* DATA KOSONG */
+
+.pengumuman-kosong {
+    padding: 60px 20px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #b9dcc9;
+    border-radius: 18px;
+}
+
+.pengumuman-kosong .icon {
+    margin-bottom: 15px;
+    color: #198754;
+    font-size: 45px;
+}
+
+.pengumuman-kosong h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+    font-size: 22px;
+}
+
+.pengumuman-kosong p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   RESPONSIVE PENGUMUMAN
+====================================================== */
+
+@media (max-width: 991px) {
+
+    .pengumuman-section {
+        padding: 55px 0;
+    }
+
+    .pengumuman-header h2 {
+        font-size: 29px;
+    }
+
+    .pengumuman-foto {
+        height: 200px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .pengumuman-header h2 {
+        font-size: 26px;
+    }
+
+    .pengumuman-header p {
+        font-size: 15px;
+    }
+
+    .pengumuman-foto {
+        height: 180px;
+    }
+
+    .pengumuman-info {
+        padding: 20px;
+    }
+
+}
+
+
+/* =====================================================
+           EKSTRAKURIKULER
+        ===================================================== */
+
+.eskul-section {
+    padding: 80px 0;
+    background: #f8faf9;
+}
+
+.eskul-header {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.eskul-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #006b3c;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.eskul-header h2 {
+    margin: 0 0 12px;
+
+    color: #1f2937;
+
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.eskul-header p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+           CARD
+        ===================================================== */
+
+.eskul-card {
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+
+    transition: all .3s ease;
+}
+
+.eskul-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 107, 60, .12);
+
+    border-color: #b9dcc9;
+}
+
+
+/* =====================================================
+           FOTO
+        ===================================================== */
+
+.eskul-foto {
+    width: 100%;
+    height: 240px;
+
+    overflow: hidden;
+
+    background: #e8f5ee;
+}
+
+.eskul-foto img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    transition: transform .4s ease;
+}
+
+.eskul-card:hover .eskul-foto img {
+    transform: scale(1.05);
+}
+
+
+/* JIKA TIDAK ADA GAMBAR */
+
+.eskul-no-foto {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+/* TOMBOL LIHAT SEMUA EKSTRAKURIKULER */
+/* TOMBOL LIHAT SEMUA EKSTRAKURIKULER */
+.ekstrakurikuler-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.ekstrakurikuler-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background-color: #198754;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ekstrakurikuler-more .btn:hover {
+    background-color: #146c43;
+    border-color: #146c43;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.18);
+}
+
+.ekstrakurikuler-more .btn span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.ekstrakurikuler-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* =====================================================
+           INFORMASI
+        ===================================================== */
+
+.eskul-info {
+    padding: 24px;
+
+    text-align: center;
+}
+
+.eskul-info h3 {
+    margin: 0 0 8px;
+
+    color: #1f2937;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.eskul-info p {
+    margin: 0 0 18px;
+
+    color: #006b3c;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+           BUTTON
+        ===================================================== */
+
+.eskul-info .btn {
+    padding: 9px 18px;
+
+    background: #006b3c;
+
+    border-color: #006b3c;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all .25s ease;
+}
+
+.eskul-info .btn:hover {
+    background: #00552f;
+    border-color: #00552f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+           KOSONG
+        ===================================================== */
+
+.eskul-kosong {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed #b9dcc9;
+
+    border-radius: 18px;
+}
+
+.eskul-kosong h3 {
+    margin-bottom: 8px;
+
+    color: #1f2937;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.eskul-kosong p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+/* =====================================================
+           RESPONSIVE EKSTRAKURIKULER
+        ===================================================== */
+
+@media (max-width: 991px) {
+
+    .eskul-section {
+        padding: 60px 0;
+    }
+
+    .eskul-header {
+        margin-bottom: 40px;
+    }
+
+    .eskul-header h2 {
+        font-size: 30px;
+    }
+
+    .eskul-foto {
+        height: 250px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .eskul-section {
+        padding: 50px 0;
+    }
+
+    .eskul-header {
+        margin-bottom: 35px;
+    }
+
+    .eskul-header h2 {
+        font-size: 26px;
+    }
+
+    .eskul-header p {
+        font-size: 14px;
+    }
+
+    .eskul-foto {
+        height: 230px;
+    }
+
+    .eskul-info {
+        padding: 20px;
+    }
+
+    .eskul-info h3 {
+        font-size: 18px;
+    }
+
+}
+
+/* =====================================================
+   GALERI
+====================================================== */
+
+.galeri-section {
+    padding: 90px 0;
+    background: #f8faf9;
+}
+
+/* HEADER */
+
+.galeri-header {
+    max-width: 700px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.galeri-header .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #087f5b;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.galeri-header h2 {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.galeri-header p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+/* CARD */
+
+.galeri-card {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    background: #e8f5ee;
+    border: 1px solid #e5eee9;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeri-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0, 107, 60, 0.15);
+}
+
+/* FOTO */
+
+.galeri-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.galeri-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.galeri-card:hover .galeri-foto img {
+    transform: scale(1.05);
+}
+
+/* OVERLAY */
+
+.galeri-overlay {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 135px;
+    padding: 55px 22px 20px;
+    color: #fff;
+    background: linear-gradient(
+        to top,
+        rgba(0, 45, 28, 0.94),
+        rgba(0, 45, 28, 0.60),
+        transparent
+    );
+}
+
+.galeri-overlay h3 {
+    margin: 0 0 6px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.galeri-overlay small {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13px;
+}
+
+/* PANAH */
+
+.galeri-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #087f5b;
+    background: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.galeri-card:hover .galeri-arrow {
+    color: #fff;
+    background: #087f5b;
+    transform: translateX(4px);
+}
+
+/* FOTO KOSONG */
+
+.galeri-no-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    color: #6b7280;
+    background: #e8f5ee;
+}
+
+.galeri-no-foto span {
+    font-size: 40px;
+}
+
+.galeri-no-foto small {
+    font-size: 13px;
+}
+
+/* TOMBOL LIHAT SEMUA */
+
+.galeri-more {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.galeri-more .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1px solid #198754;
+    border-radius: 10px;
+    background: #198754;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.galeri-more .btn:hover {
+    background: #146c43;
+    border-color: #146c43;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.galeri-more .btn span {
+    transition: transform 0.3s ease;
+}
+
+.galeri-more .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* DATA KOSONG */
+
+.galeri-kosong {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #b9dcc9;
+    border-radius: 18px;
+}
+
+.galeri-kosong .icon {
+    margin-bottom: 15px;
+    font-size: 45px;
+}
+
+.galeri-kosong h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.galeri-kosong p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+    .galeri-section {
+        padding: 60px 0;
+    }
+
+    .galeri-header h2 {
+        font-size: 29px;
+    }
+
+    .galeri-card {
+        height: 250px;
+    }
+
+    .galeri-overlay {
+        padding: 50px 18px 18px;
+    }
+
+    .galeri-overlay h3 {
+        font-size: 17px;
+    }
+}
+
+/* =====================================================
+   FOOTER PREMIUM
+===================================================== */
+
+.footer {
+    position: relative;
+    overflow: hidden;
+
+    padding: 80px 0 0;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(135deg,
+            #062f24 0%,
+            #064c38 48%,
+            #073c2d 100%);
+
+    font-family: 'DM Sans', sans-serif;
+}
+
+
+/* =====================================================
+   AKSEN ATAS
+===================================================== */
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(90deg,
+            #d4af37,
+            #f1d77a,
+            #d4af37);
+}
+
+
+/* =====================================================
+   BACKGROUND AKSEN
+===================================================== */
+
+.footer::after {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -220px;
+    bottom: -250px;
+
+    border: 1px solid rgba(212, 175, 55, .13);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 45px rgba(212, 175, 55, .025),
+        0 0 0 90px rgba(212, 175, 55, .018),
+        0 0 0 135px rgba(212, 175, 55, .012);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   KOLOM
+===================================================== */
+
+.footer-column {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.footer-logo {
+    width: 92px;
+    height: 92px;
+
+    object-fit: contain;
+
+    display: block;
+
+    padding: 7px;
+
+    margin-bottom: 22px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    border: 3px solid rgba(212, 175, 55, .75);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .22);
+
+    transition: all .3s ease;
+}
+
+.footer-logo:hover {
+    transform: translateY(-4px) rotate(-2deg);
+
+    box-shadow:
+        0 18px 35px rgba(0, 0, 0, .28);
+}
+
+
+/* =====================================================
+   NAMA SEKOLAH
+===================================================== */
+
+.footer h4 {
+    margin: 0 0 13px;
+
+    color: #ffffff;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    letter-spacing: .2px;
+}
+
+
+/* GARIS GOLD */
+
+.footer h4::after {
+    content: "";
+
+    display: block;
+
+    width: 45px;
+    height: 3px;
+
+    margin-top: 12px;
+
+    background: #d4af37;
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   DESKRIPSI
+===================================================== */
+
+.footer-description {
+    max-width: 450px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, .72);
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+
+/* =====================================================
+   JUDUL KOLOM
+===================================================== */
+
+.footer h5 {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 7px 0 27px;
+
+    color: #ffffff;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+
+/* GARIS GOLD */
+
+.footer h5::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -10px;
+
+    width: 34px;
+    height: 3px;
+
+    background: #d4af37;
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.footer-links {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+
+    color: rgba(255, 255, 255, .70);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all .25s ease;
+}
+
+.footer-links a::before {
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 10px;
+
+    background: #d4af37;
+
+    border-radius: 50%;
+
+    opacity: .7;
+
+    transition: all .25s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+
+    transform: translateX(5px);
+}
+
+.footer-links a:hover::before {
+    width: 8px;
+    height: 8px;
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   KONTAK
+===================================================== */
+
+.footer-contact {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-bottom: 16px;
+
+    color: rgba(255, 255, 255, .72);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.footer-contact .icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #f1d77a;
+
+    background: rgba(212, 175, 55, .10);
+
+    border: 1px solid rgba(212, 175, 55, .20);
+
+    font-size: 16px;
+
+    transition: all .3s ease;
+}
+
+.footer-contact li:hover .icon {
+    color: #073c2d;
+
+    background: #d4af37;
+
+    border-color: #d4af37;
+
+    transform: translateY(-2px);
+}
+
+.footer-contact li span:last-child {
+    padding-top: 7px;
+}
+
+
+/* =====================================================
+   SOCIAL MEDIA
+===================================================== */
+
+.footer-social {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.footer-social a {
+    width: 41px;
+    height: 41px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, .07);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition: all .3s ease;
+}
+
+.footer-social a:hover {
+    color: #073c2d;
+
+    background: #d4af37;
+
+    border-color: #d4af37;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .18);
+}
+
+
+/* =====================================================
+   FOOTER BOTTOM
+===================================================== */
+
+.footer-bottom {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 60px;
+
+    padding: 23px 0;
+
+    border-top:
+        1px solid rgba(255, 255, 255, .12);
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, .55);
+
+    font-size: 13px;
+}
+
+.footer-bottom strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-bottom-right {
+    color: #d4af37;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: .5px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .footer {
+        padding-top: 55px;
+    }
+
+    .footer-logo {
+        width: 82px;
+        height: 82px;
+    }
+
+    .footer h4 {
+        font-size: 23px;
+    }
+
+    .footer h5 {
+        margin-top: 15px;
+    }
+
+    .footer-column {
+        margin-bottom: 18px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 8px;
+
+        margin-top: 40px;
+    }
+
+    .footer-bottom-right {
+        text-align: center;
+    }
+}
