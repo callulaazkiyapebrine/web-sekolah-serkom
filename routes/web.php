@@ -64,7 +64,7 @@ Route::get(
  * Detail guru
  * URL: /guru/{id}
  */
-Route::get('/guru/{slug}', [GuruController::class, 'publicShow'])
+Route::get('/guru/{id}', [GuruController::class, 'publicShow'])
     ->name('public.guru.show');
 
 /*

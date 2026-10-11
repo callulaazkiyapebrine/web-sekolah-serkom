@@ -202,8 +202,10 @@
 
 
                         {{-- DETAIL PUBLIC --}}
-                        <a href="{{ route('public.guru.show', ['slug' => $dataGuru->slug]) }}" class="btn btn-success btn-sm"> Lihat Detail Guru </a>
-
+                        <a href="{{ route('public.guru.show', ['id' => Crypt::encrypt($dataGuru->id_guru)]) }}"
+                            class="btn btn-success btn-sm">
+                            Lihat Detail 
+                        </a>
                     </div>
 
                 </div>

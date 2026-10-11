@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ekstrakurikuler;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -197,34 +198,33 @@ class EkstrakurikulerController extends Controller
         }
     }
 
-    public function publicEkstrakurikuler()
-    {
-        $ekstrakurikuler = \App\Models\Ekstrakurikuler::all();
+   public function publicEkstrakurikuler()
+{
+    $ekstrakurikuler = Ekstrakurikuler::all();
+    $profilSekolah = ProfilSekolah::first();
 
-        return view('public.ekstrakurikuler', compact('ekstrakurikuler'));
+    return view(
+        'public.ekstrakurikuler',
+        compact('ekstrakurikuler', 'profilSekolah')
+    );
+}
+
+public function publicShow($slug)
+{
+    try {
+        $ekstrakurikuler = Ekstrakurikuler::where(
+            'slug',
+            $slug
+        )->firstOrFail();
+
+        $profilSekolah = ProfilSekolah::first();
+
+        return view(
+            'public.ekstrakurikuler.show',
+            compact('ekstrakurikuler', 'profilSekolah')
+        );
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        abort(404);
     }
-
-    public function publicShow($slug)
-    {
-        try {
-
-            $ekstrakurikuler = Ekstrakurikuler::where(
-                'slug',
-                $slug
-            )->firstOrFail();
-
-            return view(
-                'public.ekstrakurikuler.show',
-                compact('ekstrakurikuler')
-            );
-        } catch (\Exception $e) {
-
-            return redirect()
-                ->route('public.ekstrakurikuler')
-                ->with(
-                    'error',
-                    'Data ekstrakurikuler tidak ditemukan.'
-                );
-        }
-    }
+}
 }

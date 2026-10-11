@@ -510,7 +510,7 @@
 
                             <button
                                 type="button"
-                                class="btn btn-outline-success btn-sm"
+                                class="btn btn-outline-secondary btn-sm"
                                 id="tambah-link-video">
                                 <i data-feather="plus" class="me-1"></i>
                                 Tambah Link Video

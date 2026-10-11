@@ -1,18 +1,25 @@
 @extends('public.layouts.app')
+
 @section('title', 'Prestasi - ' . ($profilSekolah->nama_sekolah ?? 'Sekolah'))
 
 @section('content')
 
 <style>
+    /* =========================================
+       PRESTASI
+    ========================================= */
+
     .prestasi-section {
-        padding: 80px 0;
+        padding: 70px 0;
         background: #f8faf9;
         min-height: 600px;
     }
 
+    /* HEADER */
+
     .prestasi-header {
         max-width: 700px;
-        margin: 0 auto 50px;
+        margin: 0 auto 45px;
         text-align: center;
     }
 
@@ -39,85 +46,72 @@
         line-height: 1.7;
     }
 
-    .prestasi-link {
-        display: block;
-        color: inherit;
-        text-decoration: none;
-    }
+    /* CARD */
 
     .prestasi-card {
-        position: relative;
-        height: 390px;
+        height: 100%;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
         background: #fff;
+        border: 1px solid #edf2ef;
         border-radius: 18px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
-        transition: .35s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+        transition: .3s ease;
     }
 
-    .prestasi-link:hover .prestasi-card {
-        transform: translateY(-6px);
-        box-shadow: 0 18px 40px rgba(0, 107, 60, .14);
+    .prestasi-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 16px 35px rgba(0, 107, 60, .12);
     }
+
+    /* GAMBAR */
 
     .prestasi-foto {
         width: 100%;
-        height: 210px;
+        height: 230px;
         overflow: hidden;
+        flex-shrink: 0;
         background: #e8f5ee;
     }
 
     .prestasi-foto img {
+        display: block;
         width: 100%;
         height: 100%;
-        display: block;
         object-fit: cover;
-        transition: .5s ease;
+        transition: .4s ease;
     }
 
-    .prestasi-link:hover .prestasi-foto img {
+    .prestasi-card:hover .prestasi-foto img {
         transform: scale(1.05);
     }
 
     .prestasi-no-foto {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         color: #087f5b;
         background: #e8f5ee;
-        font-size: 45px;
+        font-size: 15px;
     }
+
+    /* ISI CARD */
 
     .prestasi-body {
-        position: relative;
-        padding: 25px 22px 20px;
-    }
-
-    .prestasi-icon {
-        position: absolute;
-        top: -27px;
-        left: 22px;
-        width: 54px;
-        height: 54px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 5px solid #fff;
-        border-radius: 50%;
-        color: #087f5b;
-        background: #e8f5ee;
-        font-size: 22px;
+        flex-direction: column;
+        flex: 1;
+        padding: 22px;
     }
 
-    .prestasi-nomor {
-        margin-bottom: 8px;
+    .prestasi-tanggal {
+        margin-bottom: 10px;
         color: #087f5b;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        font-size: 13px;
+        font-weight: 600;
     }
 
     .prestasi-body h3 {
@@ -126,45 +120,45 @@
         font-size: 20px;
         font-weight: 700;
         line-height: 1.4;
+        overflow-wrap: anywhere;
     }
 
     .prestasi-pemenang {
-        margin-bottom: 13px;
+        margin-bottom: 10px;
         color: #087f5b;
         font-size: 14px;
         font-weight: 600;
     }
 
     .prestasi-keterangan {
-        margin-bottom: 15px;
+        margin-bottom: 18px;
         color: #6b7280;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    /* TOMBOL */
+
+    .prestasi-aksi {
+        margin-top: auto;
+        padding-top: 5px;
+    }
+
+    .prestasi-aksi .btn {
+        padding: 9px 17px;
+        border-radius: 8px;
         font-size: 13px;
-        line-height: 1.6;
-    }
-
-    .prestasi-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 13px;
-        border-top: 1px solid #edf2ef;
-    }
-
-    .prestasi-tanggal {
-        color: #6b7280;
-        font-size: 12px;
-    }
-
-    .prestasi-arrow {
-        color: #087f5b;
-        font-size: 20px;
-        font-weight: 700;
+        font-weight: 600;
         transition: .3s ease;
     }
 
-    .prestasi-link:hover .prestasi-arrow {
-        transform: translateX(5px);
+    .prestasi-aksi .btn:hover {
+        background: #0b5d3b;
+        border-color: #0b5d3b;
+        transform: translateY(-2px);
     }
+
+    /* DATA KOSONG */
 
     .prestasi-kosong {
         padding: 60px 20px;
@@ -174,14 +168,11 @@
         border-radius: 18px;
     }
 
-    .prestasi-kosong .icon {
-        margin-bottom: 15px;
-        font-size: 45px;
-    }
-
     .prestasi-kosong h3 {
         margin-bottom: 8px;
         color: #1f2937;
+        font-size: 22px;
+        font-weight: 700;
     }
 
     .prestasi-kosong p {
@@ -189,8 +180,9 @@
         color: #6b7280;
     }
 
-    @media (max-width: 767px) {
+    /* RESPONSIVE */
 
+    @media (max-width: 767px) {
         .prestasi-section {
             padding: 55px 0;
         }
@@ -199,196 +191,154 @@
             font-size: 29px;
         }
 
-        .prestasi-card {
-            height: 370px;
-        }
-
         .prestasi-foto {
-            height: 195px;
+            height: 230px;
         }
 
         .prestasi-body {
-            padding: 25px 18px 18px;
+            padding: 20px;
         }
-
-        .prestasi-icon {
-            left: 18px;
-        }
-
     }
 </style>
 
-
 <section class="prestasi-section">
-
     <div class="container">
-
 
         {{-- HEADER --}}
 
         <div class="prestasi-header">
+            <span class="label">Pencapaian Sekolah</span>
 
-            <span class="label">
-                Pencapaian Sekolah
-            </span>
             <h1>
                 Prestasi {{ $profilSekolah->nama_sekolah ?? 'Sekolah' }}
             </h1>
 
             <p>
-                Berbagai pencapaian dan prestasi yang diraih
-                oleh siswa-siswi {{ $profilSekolah->nama_sekolah ?? 'sekolah ini' }}.
+                Berbagai pencapaian dan prestasi yang diraih oleh
+                siswa-siswi {{ $profilSekolah->nama_sekolah ?? 'sekolah ini' }}.
             </p>
-
         </div>
-
 
         {{-- DATA PRESTASI --}}
 
         @if(isset($prestasi) && $prestasi->count())
 
-        <div class="row g-4">
+            <div class="row g-4">
 
-            @foreach($prestasi as $item)
+                @foreach($prestasi as $item)
 
-            <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4">
 
-            <a href="{{ route('public.prestasi.show', [
-    'id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id_prestasi)
-]) }}" class="prestasi-link">
-                    <div class="prestasi-card">
+                        <div class="prestasi-card">
 
+                            {{-- GAMBAR --}}
 
-                        {{-- GAMBAR --}}
+                            <div class="prestasi-foto">
 
-                        <div class="prestasi-foto">
+                                @if($item->gambar)
 
-                            @if($item->gambar)
+                                    <img
+                                        src="{{ asset('storage/' . $item->gambar) }}"
+                                        alt="{{ $item->nama_prestasi }}"
+                                        loading="lazy">
 
-                            <img
-                                src="{{ asset('storage/' . $item->gambar) }}"
-                                alt="{{ $item->nama_prestasi }}"
-                                loading="lazy">
+                                @else
 
-                            @else
+                                    <div class="prestasi-no-foto">
+                                        Gambar belum tersedia
+                                    </div>
 
-                            <div class="prestasi-no-foto">
-                                🏆
+                                @endif
+
                             </div>
 
-                            @endif
+                            {{-- ISI --}}
 
-                        </div>
+                            <div class="prestasi-body">
 
-
-                        {{-- ISI --}}
-
-                        <div class="prestasi-body">
-
-
-                            {{-- ICON --}}
-
-                            <div class="prestasi-icon">
-                                🏆
-                            </div>
-
-
-                            {{-- NOMOR --}}
-
-                            <div class="prestasi-nomor">
-                                Prestasi {{ $loop->iteration }}
-                            </div>
-
-
-                            {{-- NAMA PRESTASI --}}
-
-                            <h3>
-                                {{ $item->nama_prestasi }}
-                            </h3>
-
-
-                            {{-- PEMENANG --}}
-
-                            @if($item->nama_pemenang)
-
-                            <div class="prestasi-pemenang">
-                                👤 {{ $item->nama_pemenang }}
-                            </div>
-
-                            @endif
-
-
-                            {{-- KETERANGAN --}}
-
-                            @if($item->keterangan)
-
-                            <div class="prestasi-keterangan">
-                                {{ \Illuminate\Support\Str::limit($item->keterangan, 80) }}
-                            </div>
-
-                            @endif
-
-
-                            {{-- FOOTER --}}
-
-                            <div class="prestasi-footer">
+                                {{-- TANGGAL --}}
 
                                 <div class="prestasi-tanggal">
-
-                                    📅
-
-                                    {{ $item->tanggal 
-                                                ? \Carbon\Carbon::parse($item->tanggal)->format('d M Y') 
-                                                : '-' }}
-
+                                    {{ $item->tanggal
+                                        ? \Carbon\Carbon::parse($item->tanggal)->format('d M Y')
+                                        : 'Tanggal tidak tersedia' }}
                                 </div>
 
-                                <div class="prestasi-arrow">
-                                    →
+                                {{-- NAMA PRESTASI --}}
+
+                                <h3>
+                                    {{ $item->nama_prestasi }}
+                                </h3>
+
+                                {{-- PEMENANG --}}
+
+                                @if($item->nama_pemenang)
+
+                                    <div class="prestasi-pemenang">
+                                        {{ $item->nama_pemenang }}
+                                    </div>
+
+                                @endif
+
+                                {{-- KETERANGAN --}}
+
+                                @if($item->keterangan)
+
+                                    <div class="prestasi-keterangan">
+                                        {{ \Illuminate\Support\Str::limit($item->keterangan, 100) }}
+                                    </div>
+
+                                @else
+
+                                    <div class="prestasi-keterangan">
+                                        Informasi prestasi sekolah.
+                                    </div>
+
+                                @endif
+
+                                {{-- TOMBOL BACA SELENGKAPNYA --}}
+
+                                <div class="prestasi-aksi">
+
+                                    <a
+                                        href="{{ route('public.prestasi.show', [
+                                            'id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id_prestasi)
+                                        ]) }}"
+                                        class="btn btn-success">
+
+                                        Baca Selengkapnya
+
+                                    </a>
+
                                 </div>
 
                             </div>
-
 
                         </div>
 
                     </div>
 
-                </a>
+                @endforeach
 
             </div>
-
-            @endforeach
-
-        </div>
-
 
         @else
 
+            {{-- DATA KOSONG --}}
 
-        {{-- KOSONG --}}
+            <div class="prestasi-kosong">
 
-        <div class="prestasi-kosong">
+                <h3>Belum Ada Prestasi</h3>
 
-            <div class="icon">
-                🏆
+                <p>
+                    Data prestasi sekolah belum tersedia.
+                </p>
+
             </div>
-
-            <h3>
-                Belum Ada Prestasi
-            </h3>
-
-            <p>
-                Data prestasi sekolah belum tersedia.
-            </p>
-
-        </div>
 
         @endif
 
-
     </div>
-
 </section>
 
-@endsection 
+@endsection

@@ -1740,11 +1740,14 @@ body {
 ====================================================== */
 
 .berita-section {
+    width: 100%;
     padding: 80px 0;
     background: #f8faf9;
 }
 
-/* HEADER */
+/* =====================================================
+   HEADER
+====================================================== */
 
 .berita-header {
     max-width: 700px;
@@ -1776,7 +1779,9 @@ body {
     line-height: 1.7;
 }
 
-/* CARD */
+/* =====================================================
+   CARD BERITA
+====================================================== */
 
 .berita-section .row {
     align-items: stretch;
@@ -1804,7 +1809,9 @@ body {
     box-shadow: 0 15px 35px rgba(0, 107, 60, 0.12);
 }
 
-/* FOTO */
+/* =====================================================
+   FOTO BERITA
+====================================================== */
 
 .berita-foto {
     width: 100%;
@@ -1826,7 +1833,9 @@ body {
     transform: scale(1.05);
 }
 
-/* TIDAK ADA FOTO */
+/* =====================================================
+   JIKA FOTO TIDAK ADA
+====================================================== */
 
 .berita-no-foto {
     display: flex;
@@ -1838,7 +1847,9 @@ body {
     font-size: 14px;
 }
 
-/* INFORMASI */
+/* =====================================================
+   INFORMASI BERITA
+====================================================== */
 
 .berita-info {
     display: flex;
@@ -1859,7 +1870,7 @@ body {
     color: #1f2937;
     font-size: 19px;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .berita-info p {
@@ -1869,12 +1880,18 @@ body {
     line-height: 1.7;
 }
 
-/* BUTTON BACA SELENGKAPNYA */
+/* =====================================================
+   TOMBOL BACA SELENGKAPNYA
+====================================================== */
 
 .berita-info .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     align-self: flex-start;
+    gap: 8px;
     margin-top: auto;
-    padding: 8px 14px;
+    padding: 9px 16px;
     border: 1px solid #006b3c;
     border-radius: 8px;
     background-color: #006b3c;
@@ -1891,7 +1908,19 @@ body {
     color: #ffffff;
 }
 
-/* TOMBOL LIHAT SEMUA BERITA */
+.berita-info .btn i,
+.berita-info .btn span {
+    transition: transform 0.3s ease;
+}
+
+.berita-info .btn:hover i,
+.berita-info .btn:hover span {
+    transform: translateX(4px);
+}
+
+/* =====================================================
+   TOMBOL LIHAT SEMUA BERITA
+====================================================== */
 
 .berita-more {
     margin-top: 40px;
@@ -1931,7 +1960,9 @@ body {
     transform: translateX(4px);
 }
 
-/* DATA KOSONG */
+/* =====================================================
+   DATA BERITA KOSONG
+====================================================== */
 
 .berita-kosong {
     padding: 60px 20px;
@@ -1943,6 +1974,7 @@ body {
 
 .berita-kosong .icon {
     margin-bottom: 15px;
+    color: #198754;
     font-size: 45px;
 }
 
@@ -1950,15 +1982,18 @@ body {
     margin-bottom: 8px;
     color: #1f2937;
     font-size: 22px;
+    font-weight: 700;
 }
 
 .berita-kosong p {
     margin: 0;
     color: #6b7280;
+    font-size: 14px;
+    line-height: 1.7;
 }
 
 /* =====================================================
-   RESPONSIVE BERITA
+   RESPONSIVE TABLET
 ====================================================== */
 
 @media (max-width: 991px) {
@@ -1974,6 +2009,10 @@ body {
         height: 300px;
     }
 }
+
+/* =====================================================
+   RESPONSIVE HP
+====================================================== */
 
 @media (max-width: 576px) {
     .berita-header h2 {
@@ -1992,7 +2031,6 @@ body {
         padding: 20px;
     }
 }
-
 
 /* =====================================================
    PRESTASI

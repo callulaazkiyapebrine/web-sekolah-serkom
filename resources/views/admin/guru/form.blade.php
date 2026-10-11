@@ -1,4 +1,4 @@
-@extends('admin')
+ @extends('admin')
 
 @section('title', isset($guru) ? 'Edit Guru' : 'Tambah Guru')
 

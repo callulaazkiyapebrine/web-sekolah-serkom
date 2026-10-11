@@ -26,7 +26,6 @@
         line-height: 1.6;
     }
 
-    /* TOMBOL TAMBAH */
     .user-page .btn-user {
         display: inline-flex;
         align-items: center;
@@ -55,7 +54,6 @@
         height: 17px;
     }
 
-    /* ALERT */
     .user-alert {
         display: flex;
         align-items: center;
@@ -65,7 +63,6 @@
         font-size: 13px;
     }
 
-    /* CARD */
     .user-card {
         width: 100%;
         border: 1px solid #dce9df;
@@ -98,7 +95,6 @@
         padding: 20px;
     }
 
-    /* SEARCH DAN JUMLAH DATA */
     .user-table-controls {
         display: flex;
         align-items: center;
@@ -145,7 +141,6 @@
         box-shadow: 0 0 0 3px rgba(25, 135, 84, .10);
     }
 
-    /* AREA SCROLL TABEL */
     .user-table-wrap {
         width: 100%;
         overflow-x: auto;
@@ -191,7 +186,6 @@
         border-bottom: none !important;
     }
 
-    /* PROPORSI KOLOM */
     #dataUser th:nth-child(1),
     #dataUser td:nth-child(1) {
         width: 65px;
@@ -219,7 +213,6 @@
         font-weight: 600;
     }
 
-    /* BADGE ROLE */
     #dataUser .badge-role {
         display: inline-flex;
         align-items: center;
@@ -247,7 +240,6 @@
         color: #475569;
     }
 
-    /* TOMBOL AKSI */
     #dataUser .aksi-wrapper {
         display: flex;
         justify-content: center;
@@ -304,18 +296,17 @@
         margin: 0;
     }
 
-    /* INFO DAN PAGINATION */
+    #infoUser {
+        color: #64746a;
+        font-size: 12px;
+    }
+
     .user-table-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
         margin-top: 17px;
-    }
-
-    #infoUser {
-        color: #64746a;
-        font-size: 12px;
     }
 
     #paginationUser {
@@ -364,7 +355,6 @@
         height: 14px;
     }
 
-    /* SEMBUNYIKAN KONTROL BAWAAN DATATABLES */
     #dataUser_wrapper .dataTables_length,
     #dataUser_wrapper .dataTables_filter,
     #dataUser_wrapper .dataTables_info,
@@ -376,7 +366,6 @@
         width: 100%;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
         .user-header {
             align-items: flex-start !important;
@@ -434,32 +423,31 @@
         </div>
 
         @if(Auth::user()->role == 'admin')
-            <a href="{{ route('admin.user.addEdit') }}" class="btn-user">
-                <i data-feather="plus"></i>
-                Tambah User Baru
-            </a>
+        <a href="{{ route('admin.user.addEdit') }}" class="btn-user">
+            <i data-feather="plus"></i>
+            Tambah User Baru
+        </a>
         @endif
     </div>
 
     {{-- ALERT SUCCESS --}}
     @if(session('success'))
-        <div class="alert alert-success user-alert" id="successAlert">
-            <i data-feather="check-circle"></i>
-            <span>{{ session('success') }}</span>
-        </div>
+    <div class="alert alert-success user-alert" id="successAlert">
+        <i data-feather="check-circle"></i>
+        <span>{{ session('success') }}</span>
+    </div>
     @endif
 
     {{-- ALERT ERROR --}}
     @if(session('error'))
-        <div class="alert alert-danger user-alert" id="errorAlert">
-            <i data-feather="x-circle"></i>
-            <span>{{ session('error') }}</span>
-        </div>
+    <div class="alert alert-danger user-alert" id="errorAlert">
+        <i data-feather="x-circle"></i>
+        <span>{{ session('error') }}</span>
+    </div>
     @endif
 
     {{-- CARD TABEL --}}
     <div class="card user-card">
-
         <div class="user-card-header">
             <h5 class="mb-0">Daftar User</h5>
             <span>Informasi akun dan hak akses pengguna yang terdaftar.</span>
@@ -469,7 +457,6 @@
 
             {{-- SEARCH DAN JUMLAH DATA --}}
             <div class="user-table-controls">
-
                 <div class="user-length">
                     <label for="jumlahUser" class="mb-0">Tampilkan</label>
 
@@ -491,14 +478,11 @@
                         placeholder="Cari username atau role..."
                         autocomplete="off">
                 </div>
-
             </div>
 
             {{-- TABEL --}}
             <div class="user-table-wrap">
-
                 <table id="dataUser" class="table table-hover align-middle">
-
                     <thead>
                         <tr>
                             <th>No</th>
@@ -510,86 +494,85 @@
 
                     <tbody>
                         @forelse($users as $item)
-                            <tr>
-                                <td class="nomor-column text-center">
-                                    {{ $loop->iteration }}
-                                </td>
+                        <tr>
+                            <td class="nomor-column text-center">
+                                {{ $loop->iteration }}
+                            </td>
 
-                                <td class="username-user">
-                                    {{ $item->username }}
-                                </td>
+                            <td class="username-user">
+                                {{ $item->username }}
+                            </td>
 
-                                <td>
-                                    @if($item->role == 'admin')
-                                        <span class="badge-role role-admin">
-                                            <i data-feather="shield"></i>
-                                            Admin
-                                        </span>
-                                    @else
-                                        <span class="badge-role role-operator">
-                                            <i data-feather="user"></i>
-                                            Operator
-                                        </span>
+                            <td>
+                                @if($item->role == 'admin')
+                                <span class="badge-role role-admin">
+                                    <i data-feather="shield"></i>
+                                    Admin
+                                </span>
+                                @else
+                                <span class="badge-role role-operator">
+                                    <i data-feather="user"></i>
+                                    Operator
+                                </span>
+                                @endif
+                            </td>
+
+                            <td>
+                                <div class="aksi-wrapper">
+
+                                    {{-- DETAIL --}}
+                                    <a
+                                        href="{{ route('admin.user.show', Crypt::encrypt($item->id_user)) }}"
+                                        class="action-btn view-btn"
+                                        title="Lihat Detail">
+                                        <i data-feather="eye"></i>
+                                    </a>
+
+                                    {{-- EDIT HANYA UNTUK ADMIN YANG LOGIN --}}
+                                    @if(Auth::user()->role == 'admin')
+                                    <a
+                                        href="{{ route('admin.user.addEdit', Crypt::encrypt($item->id_user)) }}"
+                                        class="action-btn edit-btn"
+                                        title="Edit User">
+                                        <i data-feather="edit-3"></i>
+                                    </a>
                                     @endif
-                                </td>
 
-                                <td>
-                                    <div class="aksi-wrapper">
+                                    {{-- HAPUS HANYA JIKA AKUN TARGET ADALAH OPERATOR --}}
 
-                                        {{-- DETAIL --}}
-                                        <a
-                                            href="{{ route('admin.user.show', Crypt::encrypt($item->id)) }}"
-                                            class="action-btn view-btn"
-                                            title="Lihat Detail">
-                                            <i data-feather="eye"></i>
-                                        </a>
+                                    {{-- HAPUS SEMUA USER KECUALI ADMIN UTAMA --}}
+                                    @if($item->id_user != 1 && Auth::user()->role == 'admin')
+                                    <form
+                                        action="{{ route('admin.user.delete', Crypt::encrypt($item->id_user)) }}"
+                                        method="POST"
+                                        class="d-inline"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
 
-                                        @if(Auth::user()->role == 'admin')
+                                        @csrf
+                                        @method('DELETE')
 
-                                            {{-- EDIT --}}
-                                            <a
-                                                href="{{ route('admin.user.addEdit', Crypt::encrypt($item->id)) }}"
-                                                class="action-btn edit-btn"
-                                                title="Edit User">
-                                                <i data-feather="edit-3"></i>
-                                            </a>
+                                        <button
+                                            type="submit"
+                                            class="action-btn delete-btn"
+                                            title="Hapus User">
+                                            <i data-feather="trash-2"></i>
+                                        </button>
+                                    </form>
+                                    @endif
 
-                                            {{-- HAPUS --}}
-                                            @if($item->id != 1)
-                                                <form
-                                                    action="{{ route('admin.user.delete', Crypt::encrypt($item->id)) }}"
-                                                    method="POST"
-                                                    class="d-inline"
-                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
 
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button
-                                                        type="submit"
-                                                        class="action-btn delete-btn"
-                                                        title="Hapus User">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </form>
-                                            @endif
-
-                                        @endif
-
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                         @empty
-                            <tr>
-                                <td colspan="4" class="text-center py-4">
-                                    Belum ada data user.
-                                </td>
-                            </tr>
+                        <tr>
+                            <td colspan="4" class="text-center py-4">
+                                Belum ada data user.
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
-
                 </table>
-
             </div>
 
             {{-- INFO DAN PAGINATION --}}
@@ -600,14 +583,12 @@
 
         </div>
     </div>
-
 </div>
 
 @push('scripts')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        // CEGAH DATATABLES DIINISIALISASI BERULANG
         if ($.fn.DataTable.isDataTable('#dataUser')) {
             $('#dataUser').DataTable().destroy();
         }
@@ -636,8 +617,7 @@
                 }
             },
 
-            columnDefs: [
-                {
+            columnDefs: [{
                     targets: 0,
                     orderable: false,
                     searchable: false
@@ -649,13 +629,15 @@
                 }
             ],
 
-            drawCallback: function () {
+            drawCallback: function() {
                 var api = this.api();
                 var info = api.page.info();
                 var $pagination = $('#paginationUser');
 
                 // Nomor urut otomatis mengikuti halaman.
-                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                api.column(0, {
+                    page: 'current'
+                }).nodes().each(function(cell, i) {
                     cell.innerHTML = info.start + i + 1;
                 });
 
@@ -680,7 +662,7 @@
                     }
                 }
 
-                // Tombol pagination.
+                // Pagination buatan sendiri.
                 $pagination.empty();
 
                 var totalHalaman = info.pages;
@@ -694,7 +676,7 @@
                     disabled: halamanAktif === 0
                 });
 
-                tombolSebelumnya.on('click', function () {
+                tombolSebelumnya.on('click', function() {
                     if (halamanAktif > 0) {
                         api.page('previous').draw('page');
                     }
@@ -703,7 +685,7 @@
                 $pagination.append(tombolSebelumnya);
 
                 for (var i = 0; i < totalHalaman; i++) {
-                    (function (nomorHalaman) {
+                    (function(nomorHalaman) {
                         var tombol = $('<button>', {
                             type: 'button',
                             class: 'page-btn' +
@@ -712,7 +694,7 @@
                             'aria-label': 'Halaman ' + (nomorHalaman + 1)
                         });
 
-                        tombol.on('click', function () {
+                        tombol.on('click', function() {
                             api.page(nomorHalaman).draw('page');
                         });
 
@@ -728,7 +710,7 @@
                     disabled: halamanAktif >= totalHalaman - 1
                 });
 
-                tombolBerikutnya.on('click', function () {
+                tombolBerikutnya.on('click', function() {
                     if (halamanAktif < totalHalaman - 1) {
                         api.page('next').draw('page');
                     }
@@ -742,19 +724,19 @@
             }
         });
 
-        // SEARCH DI LUAR AREA TABEL
-        $('#cariUser').on('input', function () {
+        // Pencarian.
+        $('#cariUser').on('input', function() {
             tabelUser.search(this.value).draw();
         });
 
-        // PILIH JUMLAH DATA
-        $('#jumlahUser').on('change', function () {
+        // Jumlah data per halaman.
+        $('#jumlahUser').on('change', function() {
             tabelUser.page.len(parseInt(this.value, 10)).draw();
         });
 
-        // ALERT HILANG OTOMATIS
-        setTimeout(function () {
-            $('#successAlert, #errorAlert').fadeOut(300, function () {
+        // Alert hilang otomatis.
+        setTimeout(function() {
+            $('#successAlert, #errorAlert').fadeOut(300, function() {
                 $(this).remove();
             });
         }, 3000);

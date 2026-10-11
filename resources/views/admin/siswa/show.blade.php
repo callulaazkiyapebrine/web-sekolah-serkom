@@ -325,21 +325,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- ID SISWA --}}
-                    <div class="siswa-info-item">
-                        <div class="siswa-info-icon">
-                            <i data-feather="hash"></i>
-                        </div>
-
-                        <div>
-                            <div class="siswa-info-label">ID Siswa</div>
-                            <div class="siswa-info-value">
-                                {{ $siswa->id_siswa }}
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 

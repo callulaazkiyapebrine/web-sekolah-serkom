@@ -25,6 +25,6 @@ class Berita extends Model
     // Relasi ke user yang membuat berita
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 }

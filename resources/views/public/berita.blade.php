@@ -5,11 +5,19 @@
 @section('content')
 
 <style>
+    /* ===============================
+       SECTION BERITA
+    =============================== */
+
     .berita-section {
-        padding: 80px 0;
+        padding: 70px 0;
         background: #f8faf9;
         min-height: 600px;
     }
+
+    /* ===============================
+       HEADER
+    =============================== */
 
     .berita-header {
         max-width: 700px;
@@ -20,8 +28,8 @@
     .berita-header .label {
         display: inline-block;
         margin-bottom: 10px;
-        color: #087f5b;
-        font-size: 13px;
+        color: #006b3c;
+        font-size: 14px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1.5px;
@@ -37,34 +45,38 @@
     .berita-header p {
         margin: 0;
         color: #6b7280;
+        font-size: 16px;
         line-height: 1.7;
     }
 
-    .berita-link {
-        display: block;
-        height: 100%;
-        color: inherit;
-        text-decoration: none;
-    }
+    /* ===============================
+       CARD BERITA
+    =============================== */
 
     .berita-card {
-        position: relative;
-        height: 300px;
+        height: 100%;
         overflow: hidden;
-        background: #e8f5ee;
+        background: #fff;
+        border: 1px solid #e5eee9;
         border-radius: 18px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
-        transition: .35s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+        transition: .3s ease;
     }
 
-    .berita-link:hover .berita-card {
-        transform: translateY(-6px);
-        box-shadow: 0 18px 40px rgba(0, 107, 60, .15);
+    .berita-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 15px 35px rgba(0, 107, 60, .12);
     }
+
+    /* ===============================
+       GAMBAR BERITA
+    =============================== */
 
     .berita-foto {
         width: 100%;
-        height: 100%;
+        height: 230px;
+        overflow: hidden;
+        background: #e8f5ee;
     }
 
     .berita-foto img {
@@ -72,10 +84,10 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: .5s ease;
+        transition: .4s ease;
     }
 
-    .berita-link:hover .berita-foto img {
+    .berita-card:hover .berita-foto img {
         transform: scale(1.05);
     }
 
@@ -89,64 +101,32 @@
         background: #e8f5ee;
     }
 
-    .berita-overlay {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 15px;
-        min-height: 150px;
-        padding: 60px 22px 20px;
-        color: #fff;
-        background: linear-gradient(
-            to top,
-            rgba(0, 45, 28, .95),
-            rgba(0, 45, 28, .60),
-            transparent
-        );
-    }
+    /* ===============================
+       INFORMASI BERITA
+    =============================== */
 
-    .berita-overlay-content {
-        min-width: 0;
+    .berita-info {
+        padding: 22px;
     }
 
     .berita-tanggal {
-        margin-bottom: 7px;
-        color: rgba(255, 255, 255, .78);
+        margin-bottom: 10px;
+        color: #6b7280;
         font-size: 13px;
     }
 
-    .berita-overlay h3 {
-        margin: 0;
-        color: #fff;
-        font-size: 19px;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-
-    .berita-arrow {
-        display: flex;
-        flex-shrink: 0;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        color: #087f5b;
-        background: #fff;
+    .berita-info h3 {
+        margin-bottom: 0;
+        color: #1f2937;
         font-size: 20px;
         font-weight: 700;
-        transition: .3s ease;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
     }
 
-    .berita-link:hover .berita-arrow {
-        color: #fff;
-        background: #087f5b;
-        transform: translateX(4px);
-    }
+    /* ===============================
+       JIKA BELUM ADA BERITA
+    =============================== */
 
     .berita-kosong {
         padding: 60px 20px;
@@ -171,34 +151,37 @@
         color: #6b7280;
     }
 
-    @media (max-width: 767px) {
+    /* ===============================
+       RESPONSIVE
+    =============================== */
+
+    @media (max-width: 575.98px) {
+
         .berita-section {
-            padding: 55px 0;
+            padding: 45px 0;
         }
 
         .berita-header h1 {
-            font-size: 29px;
+            font-size: 28px;
         }
 
-        .berita-card {
-            height: 250px;
+        .berita-foto {
+            height: 260px;
         }
 
-        .berita-overlay {
-            padding: 50px 18px 18px;
-        }
-
-        .berita-overlay h3 {
-            font-size: 17px;
-        }
     }
 </style>
 
 <section class="berita-section">
+
     <div class="container">
 
+        {{-- HEADER --}}
         <div class="berita-header">
-            <span class="label">Informasi Sekolah</span>
+
+            <span class="label">
+                Informasi Sekolah
+            </span>
 
             <h1>
                 Berita {{ $profilSekolah->nama_sekolah ?? 'Sekolah' }}
@@ -208,8 +191,10 @@
                 Informasi dan berita terbaru seputar kegiatan
                 {{ $profilSekolah->nama_sekolah ?? 'sekolah ini' }}.
             </p>
+
         </div>
 
+        {{-- DATA BERITA --}}
         @if(isset($beritas) && $beritas->count() > 0)
 
             <div class="row g-4">
@@ -218,54 +203,58 @@
 
                     <div class="col-12 col-md-6 col-lg-4">
 
-                        @if(!empty($berita->slug))
-                            <a
-                                href="{{ route('public.berita.show', ['slug' => $berita->slug]) }}"
-                                class="berita-link"
-                            >
-                        @else
-                            <div class="berita-link">
-                        @endif
+                        {{-- CARD --}}
+                        <div class="berita-card">
 
-                                <div class="berita-card">
+                            {{-- GAMBAR --}}
+                            <div class="berita-foto">
 
-                                    <div class="berita-foto">
-                                        @if($berita->gambar)
-                                            <img
-                                                src="{{ asset('storage/' . $berita->gambar) }}"
-                                                alt="{{ $berita->judul }}"
-                                                loading="lazy"
-                                            >
-                                        @else
-                                            <div class="berita-no-foto">
-                                                Tidak ada foto
-                                            </div>
-                                        @endif
+                                @if($berita->gambar)
+
+                                    <img
+                                        src="{{ asset('storage/' . $berita->gambar) }}"
+                                        alt="{{ $berita->judul }}"
+                                        loading="lazy"
+                                    >
+
+                                @else
+
+                                    <div class="berita-no-foto">
+                                        Tidak ada foto
                                     </div>
 
-                                    <div class="berita-overlay">
+                                @endif
 
-                                        <div class="berita-overlay-content">
-                                            <div class="berita-tanggal">
-                                                {{ $berita->created_at
-                                                    ? $berita->created_at->format('d M Y')
-                                                    : '-' }}
-                                            </div>
+                            </div>
 
-                                            <h3>{{ $berita->judul }}</h3>
-                                        </div>
+                            {{-- INFORMASI --}}
+                            <div class="berita-info">
 
-                                        <span class="berita-arrow">→</span>
-
-                                    </div>
-
+                                <div class="berita-tanggal">
+                                    {{ $berita->created_at
+                                        ? $berita->created_at->format('d M Y')
+                                        : '-' }}
                                 </div>
 
-                        @if(!empty($berita->slug))
-                            </a>
-                        @else
+                                <h3>
+                                    {{ $berita->judul }}
+                                </h3>
+
+                                {{-- TOMBOL BACA SELENGKAPNYA --}}
+                                @if(!empty($berita->slug))
+
+                                    <a
+                                        href="{{ route('public.berita.show', ['slug' => $berita->slug]) }}"
+                                        class="btn btn-success btn-sm mt-3"
+                                    >
+                                        Baca Selengkapnya
+                                    </a>
+
+                                @endif
+
                             </div>
-                        @endif
+
+                        </div>
 
                     </div>
 
@@ -275,17 +264,27 @@
 
         @else
 
+            {{-- BELUM ADA BERITA --}}
             <div class="berita-kosong">
-                <div class="icon">📰</div>
 
-                <h3>Belum Ada Berita</h3>
+                <div class="icon">
+                    📰
+                </div>
 
-                <p>Berita sekolah belum tersedia.</p>
+                <h3>
+                    Belum Ada Berita
+                </h3>
+
+                <p>
+                    Berita sekolah belum tersedia.
+                </p>
+
             </div>
 
         @endif
 
     </div>
+
 </section>
 
 @endsection

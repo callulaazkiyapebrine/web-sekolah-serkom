@@ -12,26 +12,26 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-public function processLogin(Request $request)
-{
-    $credentials = $request->validate([
-        'username' => 'required',
-        'password' => 'required',
-    ]);
+    public function processLogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-    if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
 
-        $request->session()->regenerate();
+            $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
+        }
+
+        return back()
+            ->withErrors([
+                'username' => 'Username atau password tidak sesuai.'
+            ])
+            ->withInput($request->only('username'));
     }
-
-    return back()
-        ->withErrors([
-            'username' => 'Username atau password tidak sesuai.'
-        ])
-        ->withInput($request->only('username'));
-}
     public function logout(Request $request)
     {
         Auth::logout();

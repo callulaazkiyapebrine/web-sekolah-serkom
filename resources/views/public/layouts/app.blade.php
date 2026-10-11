@@ -31,7 +31,7 @@
 
 </head>
 
-<body>
+ <body>
 
     {{-- NAVBAR --}}
     @include('public.layouts.navbar')
@@ -39,11 +39,15 @@
     {{-- ISI HALAMAN --}}
     @yield('content')
 
+    {{-- FOOTER --}}
+    @include('public.layouts.footer')
+
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
 
     @stack('scripts')
 
 </body>
+
 
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlbumGaleri;
 use App\Models\MediaGaleri;
+use App\Models\ProfilSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -50,14 +51,14 @@ class GaleriController extends Controller
         return view('admin.galeri.form', compact('album'));
     }
 
-    // Menyimpan album, foto, video, dan link video.
     public function save(Request $request, $id = null)
     {
         $album = null;
 
+        // Mengambil album lama saat edit.
         if ($request->filled('id_album')) {
             try {
-                $idAlbum = Crypt::decrypt($request->id_album);
+                $idAlbum = Crypt::decrypt($request->input('id_album'));
 
                 $album = AlbumGaleri::findOrFail($idAlbum);
             } catch (\Exception $e) {
@@ -67,6 +68,7 @@ class GaleriController extends Controller
             }
         }
 
+        // Validasi data album dan media.
         $request->validate([
             'judul' => ['required', 'string', 'max:100'],
             'tanggal' => ['required', 'date'],
@@ -87,13 +89,16 @@ class GaleriController extends Controller
                 'max:102400',
             ],
 
-            'video_urls' => ['nullable', 'string', 'max:20000'],
+            // Form Blade mengirim video_urls[] sebagai array.
+            'video_urls' => ['nullable', 'array'],
+            'video_urls.*' => ['nullable', 'string', 'max:2000'],
+
             'hapus_media' => ['nullable', 'array'],
             'hapus_media.*' => ['required', 'string'],
         ], [
             'judul.required' => 'Judul album wajib diisi.',
             'judul.max' => 'Judul album maksimal 100 karakter.',
-            'tanggal.required' => 'Tanggal acara wajib diisi.',
+            'tanggal.required' => 'Tanggal kegiatan wajib diisi.',
 
             'foto_files.*.image' => 'Semua file foto harus berupa gambar.',
             'foto_files.*.mimes' => 'Foto harus berformat JPG, JPEG, PNG, atau WEBP.',
@@ -103,18 +108,13 @@ class GaleriController extends Controller
             'video_files.*.max' => 'Ukuran setiap video maksimal 100 MB.',
         ]);
 
-        // Memisahkan link video berdasarkan baris.
-        $daftarLink = collect(
-            preg_split(
-                '/\r\n|\r|\n/',
-                trim($request->input('video_urls', ''))
-            )
-        )
-            ->map(fn ($url) => trim($url))
-            ->filter(fn ($url) => $url !== '')
+        // Mengambil link video dari setiap kolom input.
+        $daftarLink = collect($request->input('video_urls', []))
+            ->filter(fn($url) => is_string($url) && trim($url) !== '')
+            ->map(fn($url) => trim($url))
             ->values();
 
-        // Memastikan setiap link menggunakan HTTP atau HTTPS.
+        // Memastikan setiap link video valid dan menggunakan HTTP/HTTPS.
         foreach ($daftarLink as $url) {
             if (
                 !filter_var($url, FILTER_VALIDATE_URL) ||
@@ -127,7 +127,7 @@ class GaleriController extends Controller
                 return back()
                     ->withInput()
                     ->withErrors([
-                        'video_urls' => 'Setiap baris link video harus berupa URL HTTP atau HTTPS yang valid.',
+                        'video_urls' => 'Setiap link video harus berupa URL HTTP atau HTTPS yang valid.',
                     ]);
             }
         }
@@ -138,17 +138,18 @@ class GaleriController extends Controller
         DB::beginTransaction();
 
         try {
-            // Membuat album baru jika bukan proses edit.
+            // Jika ID tidak dikirim, buat album baru.
             if (!$album) {
                 $album = new AlbumGaleri();
             }
 
+            // Simpan informasi album.
             $album->judul = $request->judul;
             $album->tanggal = $request->tanggal;
             $album->keterangan = $request->keterangan;
             $album->save();
 
-            // Menyimpan banyak foto.
+            // Simpan foto baru jika ada.
             foreach ($request->file('foto_files', []) as $foto) {
                 $path = $foto->store('galeri', 'public');
 
@@ -164,7 +165,7 @@ class GaleriController extends Controller
                 ]);
             }
 
-            // Menyimpan banyak video yang diunggah.
+            // Simpan file video baru jika ada.
             foreach ($request->file('video_files', []) as $video) {
                 $path = $video->store('galeri', 'public');
 
@@ -180,7 +181,7 @@ class GaleriController extends Controller
                 ]);
             }
 
-            // Menyimpan link video, satu link per baris.
+            // Simpan link video baru jika ada.
             foreach ($daftarLink as $url) {
                 $album->media()->create([
                     'kategori' => 'video',
@@ -188,7 +189,7 @@ class GaleriController extends Controller
                 ]);
             }
 
-            // Menghapus media yang dipilih saat mengedit album.
+            // Hapus hanya media yang dicentang dan milik album ini.
             foreach ($request->input('hapus_media', []) as $encryptedId) {
                 try {
                     $mediaId = Crypt::decrypt($encryptedId);
@@ -204,13 +205,10 @@ class GaleriController extends Controller
                     continue;
                 }
 
-                // Catat file lokal untuk dihapus setelah transaksi berhasil.
+                // Link video tidak boleh dianggap sebagai file lokal.
                 if (
                     $media->file &&
-                    !Str::startsWith(
-                        $media->file,
-                        ['http://', 'https://']
-                    )
+                    !Str::startsWith($media->file, ['http://', 'https://'])
                 ) {
                     $fileLamaUntukDihapus[] = $media->file;
                 }
@@ -220,7 +218,7 @@ class GaleriController extends Controller
 
             DB::commit();
 
-            // Hapus file lama setelah database berhasil disimpan.
+            // Hapus file fisik setelah transaksi database berhasil.
             foreach (array_unique($fileLamaUntukDihapus) as $path) {
                 Storage::disk('public')->delete($path);
             }
@@ -251,7 +249,6 @@ class GaleriController extends Controller
                 );
         }
     }
-
     // Detail album di halaman admin.
     public function show($id)
     {
@@ -312,6 +309,7 @@ class GaleriController extends Controller
         }
     }
 
+
     // Menampilkan seluruh album di halaman publik.
     public function publicGaleri()
     {
@@ -324,8 +322,14 @@ class GaleriController extends Controller
             ->orderBy('tanggal', 'desc')
             ->paginate(12);
 
-        return view('public.galeri', compact('galeri'));
+        $profilSekolah = \App\Models\ProfilSekolah::first();
+
+        return view('public.galeri', compact(
+            'galeri',
+            'profilSekolah'
+        ));
     }
+
 
     // Detail album di halaman publik.
     public function publicShow($id)
@@ -336,7 +340,12 @@ class GaleriController extends Controller
             $album = AlbumGaleri::with('media')
                 ->findOrFail($id);
 
-            return view('public.galeri.show', compact('album'));
+            $profilSekolah = \App\Models\ProfilSekolah::first();
+
+            return view('public.galeri.show', compact(
+                'album',
+                'profilSekolah'
+            ));
         } catch (\Exception $e) {
             abort(404);
         }

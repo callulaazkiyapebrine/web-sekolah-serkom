@@ -226,7 +226,7 @@
 
             <form
                 action="{{ $user
-                    ? route('admin.user.save', Crypt::encrypt($user->id))
+                    ? route('admin.user.save', Crypt::encrypt($user->id_user))
                     : route('admin.user.save') }}"
                 method="POST">
 
@@ -352,4 +352,3 @@
 </script>
 
 @endsection
-

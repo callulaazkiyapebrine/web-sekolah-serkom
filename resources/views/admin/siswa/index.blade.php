@@ -398,10 +398,17 @@
         width: 65px !important;
     }
 
-    #dataSiswa th:nth-child(2),
-    #dataSiswa td:nth-child(2) {
-        width: 150px !important;
-    }
+
+/* Judul NISN */
+
+#dataSiswa th:nth-child(2) {
+    text-align: left;
+    padding-left: 30px;
+}
+
+#dataSiswa td:nth-child(2) {
+    text-align: left !important;
+}
 
     #dataSiswa th:nth-child(3),
     #dataSiswa td:nth-child(3) {
@@ -413,10 +420,12 @@
         width: 170px !important;
     }
 
-    #dataSiswa th:nth-child(5),
-    #dataSiswa td:nth-child(5) {
-        width: 135px !important;
-    }
+/* Isi data Tahun Masuk saja */
+#dataSiswa th:nth-child(5),
+#dataSiswa td:nth-child(5) {
+    text-align: center !important;
+    padding-left: 12px;
+}
 
     #dataSiswa th:nth-child(6),
     #dataSiswa td:nth-child(6) {

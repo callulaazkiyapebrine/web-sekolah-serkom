@@ -62,7 +62,7 @@
         height: 16px;
     }
 
-    /* KARTU BERITA */
+    /* KARTU */
     .berita-card {
         overflow: hidden;
         border: 1px solid #e5ebe6;
@@ -116,7 +116,7 @@
         overflow-wrap: anywhere;
     }
 
-    /* FOTO BERITA */
+    /* GAMBAR */
     .berita-cover-wrapper {
         display: flex;
         align-items: center;
@@ -173,7 +173,7 @@
         height: 18px;
     }
 
-    /* INFORMASI BERITA */
+    /* INFORMASI */
     .berita-info-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -225,6 +225,25 @@
         overflow-wrap: anywhere;
     }
 
+    /* STATUS */
+    .berita-status {
+        display: inline-block;
+        padding: 5px 11px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .berita-status-publish {
+        background: #dcefe2;
+        color: #0b5d3b;
+    }
+
+    .berita-status-draft {
+        background: #fff0d5;
+        color: #8a5a00;
+    }
+
     /* ISI BERITA */
     .berita-isi {
         margin-top: 26px;
@@ -254,6 +273,7 @@
         font-size: 14px;
         line-height: 1.9;
         overflow-wrap: anywhere;
+        white-space: normal;
     }
 
     .berita-isi-kosong {
@@ -264,12 +284,40 @@
     /* FOOTER */
     .berita-card-footer {
         display: flex;
+        justify-content: flex-end;
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;
         padding: 18px 32px;
         border-top: 1px solid #e2ebe4;
         background: #fbfcfb;
+    }
+
+    .btn-edit-berita {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border: 1px solid #198754;
+        border-radius: 9px;
+        background: #198754;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .2s ease;
+    }
+
+    .btn-edit-berita:hover {
+        background: #0b5d3b;
+        border-color: #0b5d3b;
+        color: #fff;
+    }
+
+    .btn-edit-berita i {
+        width: 16px;
+        height: 16px;
     }
 
     /* RESPONSIVE */
@@ -375,7 +423,6 @@
 </style>
 
 <div class="container-fluid pt-2 pb-4">
-
     <div class="detail-berita">
 
         {{-- HEADER --}}
@@ -397,7 +444,7 @@
         {{-- KARTU DETAIL --}}
         <div class="berita-card">
 
-            {{-- IDENTITAS BERITA --}}
+            {{-- JUDUL BERITA --}}
             <div class="berita-card-header">
                 <div class="berita-avatar">
                     <i data-feather="file-text"></i>
@@ -405,28 +452,27 @@
 
                 <div>
                     <span class="berita-label">Informasi Berita</span>
-
                     <h2 class="berita-title">
                         {{ $berita->judul }}
                     </h2>
                 </div>
             </div>
 
-            {{-- FOTO BERITA --}}
+            {{-- GAMBAR BERITA --}}
             <div class="berita-cover-wrapper">
                 @if($berita->gambar)
-                <img
-                    src="{{ asset('storage/' . $berita->gambar) }}"
-                    alt="{{ $berita->judul }}"
-                    class="berita-cover">
+                    <img
+                        src="{{ asset('storage/' . $berita->gambar) }}"
+                        alt="{{ $berita->judul }}"
+                        class="berita-cover">
                 @else
-                <div class="berita-cover-placeholder">
-                    <i data-feather="image"></i>
-                </div>
+                    <div class="berita-cover-placeholder">
+                        <i data-feather="image"></i>
+                    </div>
                 @endif
             </div>
 
-            {{-- INFORMASI --}}
+            {{-- INFORMASI BERITA --}}
             <div class="berita-card-body">
 
                 <h3 class="berita-section-title">
@@ -435,40 +481,6 @@
                 </h3>
 
                 <div class="berita-info-grid">
-
-                    {{-- ID BERITA --}}
-                    <div class="berita-info-item">
-                        <div class="berita-info-icon">
-                            <i data-feather="hash"></i>
-                        </div>
-
-                        <div class="berita-info-text">
-                            <div class="berita-info-label">
-                                ID Berita
-                            </div>
-
-                            <div class="berita-info-value">
-                                {{ $berita->id_berita }}
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- JUDUL --}}
-                    <div class="berita-info-item">
-                        <div class="berita-info-icon">
-                            <i data-feather="file-text"></i>
-                        </div>
-
-                        <div class="berita-info-text">
-                            <div class="berita-info-label">
-                                Judul Berita
-                            </div>
-
-                            <div class="berita-info-value">
-                                {{ $berita->judul }}
-                            </div>
-                        </div>
-                    </div>
 
                     {{-- TANGGAL --}}
                     <div class="berita-info-item">
@@ -483,27 +495,52 @@
 
                             <div class="berita-info-value">
                                 @if($berita->tanggal)
-                                {{ \Carbon\Carbon::parse($berita->tanggal)->translatedFormat('d F Y') }}
+                                    {{ \Carbon\Carbon::parse($berita->tanggal)->translatedFormat('d F Y') }}
                                 @else
-                                -
+                                    -
                                 @endif
                             </div>
                         </div>
                     </div>
 
-                    {{-- KATEGORI --}}
+                    {{-- STATUS --}}
                     <div class="berita-info-item">
                         <div class="berita-info-icon">
-                            <i data-feather="bookmark"></i>
+                            <i data-feather="check-circle"></i>
                         </div>
 
                         <div class="berita-info-text">
                             <div class="berita-info-label">
-                                Kategori
+                                Status Publikasi
                             </div>
 
                             <div class="berita-info-value">
-                                Berita Sekolah
+                                @if(strtolower($berita->status ?? '') === 'publish')
+                                    <span class="berita-status berita-status-publish">
+                                        Publish
+                                    </span>
+                                @else
+                                    <span class="berita-status berita-status-draft">
+                                        {{ ucfirst($berita->status ?? 'Draft') }}
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- PEMBUAT BERITA --}}
+                    <div class="berita-info-item">
+                        <div class="berita-info-icon">
+                            <i data-feather="user"></i>
+                        </div>
+
+                        <div class="berita-info-text">
+                            <div class="berita-info-label">
+                                Dibuat Oleh
+                            </div>
+
+                            <div class="berita-info-value">
+                                {{ $berita->user->username ?? $berita->user->name ?? '-' }}
                             </div>
                         </div>
                     </div>
@@ -512,7 +549,6 @@
 
                 {{-- ISI BERITA --}}
                 <div class="berita-isi">
-
                     <div class="berita-isi-label">
                         <i data-feather="align-left"></i>
                         Isi Berita
@@ -520,22 +556,29 @@
 
                     <div class="berita-isi-content">
                         @if($berita->isi)
-                        {!! nl2br(e($berita->isi)) !!}
+                            {!! nl2br(e($berita->isi)) !!}
                         @else
-                        <span class="berita-isi-kosong">
-                            Belum ada isi berita.
-                        </span>
+                            <span class="berita-isi-kosong">
+                                Belum ada isi berita.
+                            </span>
                         @endif
                     </div>
-
                 </div>
 
             </div>
 
+            {{-- TOMBOL AKSI --}}
+            <div class="berita-card-footer">
+                <a
+                    href="{{ route('admin.berita.addEdit', \Illuminate\Support\Facades\Crypt::encrypt($berita->id_berita)) }}"
+                    class="btn-edit-berita">
+                    <i data-feather="edit-3"></i>
+                    Edit Berita
+                </a>
+            </div>
+
         </div>
-
     </div>
-
 </div>
 
 @endsection

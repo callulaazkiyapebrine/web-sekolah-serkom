@@ -1,3 +1,4 @@
+
 @extends('admin')
 
 @section('title', 'Kelola Pengumuman - MAN 2 Tasikmalaya')
@@ -26,7 +27,6 @@
         line-height: 1.6;
     }
 
-    /* TOMBOL TAMBAH */
     .btn-pengumuman {
         display: inline-flex;
         align-items: center;
@@ -55,7 +55,6 @@
         height: 17px;
     }
 
-    /* ALERT */
     .pengumuman-alert {
         display: flex;
         align-items: center;
@@ -65,7 +64,6 @@
         font-size: 13px;
     }
 
-    /* CARD */
     .pengumuman-card {
         width: 100%;
         border: 1px solid #dce9df;
@@ -145,7 +143,7 @@
         box-shadow: 0 0 0 3px rgba(25, 135, 84, .10);
     }
 
-    /* AREA SCROLL TABEL */
+    /* TABEL */
     .pengumuman-table-wrap {
         width: 100%;
         overflow-x: auto;
@@ -155,7 +153,7 @@
 
     #dataPengumuman {
         width: 100% !important;
-        min-width: 800px;
+        min-width: 1050px;
         margin: 0 !important;
         border-collapse: collapse !important;
         table-layout: fixed;
@@ -194,36 +192,49 @@
     /* PROPORSI KOLOM */
     #dataPengumuman th:nth-child(1),
     #dataPengumuman td:nth-child(1) {
-        width: 65px;
+        width: 60px;
         text-align: center;
     }
 
     #dataPengumuman th:nth-child(2),
     #dataPengumuman td:nth-child(2) {
-        width: auto;
+        width: 200px;
     }
 
     #dataPengumuman th:nth-child(3),
     #dataPengumuman td:nth-child(3) {
-        width: 145px;
-        white-space: nowrap;
+        width: 350px;
+        white-space: normal;
     }
 
     #dataPengumuman th:nth-child(4),
     #dataPengumuman td:nth-child(4) {
         width: 125px;
-        text-align: center;
+        white-space: nowrap;
     }
 
     #dataPengumuman th:nth-child(5),
     #dataPengumuman td:nth-child(5) {
-        width: 150px;
+        width: 110px;
+        text-align: center;
+    }
+
+    #dataPengumuman th:nth-child(6),
+    #dataPengumuman td:nth-child(6) {
+        width: 140px;
         text-align: center;
     }
 
     .judul-pengumuman {
         color: #244b35 !important;
         font-weight: 600;
+    }
+
+    .isi-pengumuman {
+        color: #64746a !important;
+        line-height: 1.7;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     /* STATUS */
@@ -303,7 +314,7 @@
         margin: 0;
     }
 
-    /* INFO DAN PAGINATION */
+    /* FOOTER DAN PAGINATION */
     .pengumuman-table-footer {
         display: flex;
         align-items: center;
@@ -363,7 +374,6 @@
         height: 14px;
     }
 
-    /* SEMBUNYIKAN KONTROL BAWAAN DATATABLES */
     #dataPengumuman_wrapper .dataTables_length,
     #dataPengumuman_wrapper .dataTables_filter,
     #dataPengumuman_wrapper .dataTables_info,
@@ -427,9 +437,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4 pengumuman-header">
         <div>
             <h4 class="mb-1">Data Pengumuman</h4>
-            <p class="mb-0">
-                Kelola informasi dan pengumuman sekolah.
-            </p>
+            <p class="mb-0">Kelola informasi dan pengumuman sekolah.</p>
         </div>
 
         @if(Auth::user()->role == 'admin')
@@ -466,7 +474,7 @@
 
         <div class="card-body">
 
-            {{-- SEARCH DAN JUMLAH DATA --}}
+            {{-- SEARCH --}}
             <div class="pengumuman-table-controls">
 
                 <div class="pengumuman-length">
@@ -487,13 +495,13 @@
                     <input
                         type="search"
                         id="cariPengumuman"
-                        placeholder="Cari judul atau tanggal..."
+                        placeholder="Cari judul, isi, atau tanggal..."
                         autocomplete="off">
                 </div>
 
             </div>
 
-            {{-- AREA SCROLL TABEL --}}
+            {{-- TABEL --}}
             <div class="pengumuman-table-wrap">
 
                 <table id="dataPengumuman" class="table table-hover align-middle">
@@ -502,6 +510,7 @@
                         <tr>
                             <th>No</th>
                             <th>Judul Pengumuman</th>
+                            <th>Isi Pengumuman</th>
                             <th>Tanggal</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -517,6 +526,10 @@
 
                                 <td class="judul-pengumuman">
                                     {{ $item->judul ?: '-' }}
+                                </td>
+
+                                <td class="isi-pengumuman">
+                                    {{ $item->isi ?: '-' }}
                                 </td>
 
                                 <td>
@@ -585,7 +598,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-4">
+                                <td colspan="6" class="text-center py-4">
                                     Belum ada data pengumuman.
                                 </td>
                             </tr>
@@ -611,7 +624,6 @@
 <script>
     $(document).ready(function () {
 
-        // CEGAH INISIALISASI DATATABLES BERULANG
         if ($.fn.DataTable.isDataTable('#dataPengumuman')) {
             $('#dataPengumuman').DataTable().destroy();
         }
@@ -647,19 +659,18 @@
                     searchable: false
                 },
                 {
-                    targets: [3, 4],
+                    targets: [4, 5],
                     orderable: false,
                     searchable: false
                 }
             ],
 
-            // Nomor, informasi data, dan pagination
             drawCallback: function () {
                 var api = this.api();
                 var info = api.page.info();
                 var $pagination = $('#paginationPengumuman');
 
-                // Nomor urut mengikuti halaman aktif
+                // Nomor urut sesuai halaman
                 api.column(0, {
                     page: 'current'
                 }).nodes().each(function (cell, i) {
@@ -751,17 +762,17 @@
             }
         });
 
-        // SEARCH TETAP DI LUAR TABEL
+        // Pencarian judul, isi, dan tanggal
         $('#cariPengumuman').on('input', function () {
             tabelPengumuman.search(this.value).draw();
         });
 
-        // PILIH JUMLAH DATA
+        // Jumlah data per halaman
         $('#jumlahPengumuman').on('change', function () {
             tabelPengumuman.page.len(parseInt(this.value, 10)).draw();
         });
 
-        // ALERT HILANG OTOMATIS
+        // Alert hilang otomatis
         setTimeout(function () {
             $('#successAlert, #errorAlert').fadeOut(300, function () {
                 $(this).remove();

@@ -53,42 +53,80 @@ class GuruController extends Controller
     | ADMIN - SIMPAN / UPDATE
     |--------------------------------------------------------------------------
     */
+
+    /*
+|--------------------------------------------------------------------------
+| ADMIN - SIMPAN / UPDATE
+|--------------------------------------------------------------------------
+*/
     public function save(Request $request)
     {
+        // Cek apakah ini proses edit atau tambah
+        $guru = null;
+
+        if ($request->filled('id_guru')) {
+            try {
+                $id = Crypt::decrypt($request->id_guru);
+                $guru = Guru::findOrFail($id);
+            } catch (\Exception $e) {
+                return redirect()
+                    ->route('admin.guru.index')
+                    ->with('error', 'Data guru tidak ditemukan.');
+            }
+        }
+
+        // Validasi data
         $request->validate([
             'nama_guru' => 'required|string|max:100',
             'nip'       => 'nullable|string|max:50',
             'mapel'     => 'nullable|string|max:100',
-            'foto'      => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'foto'      => ($guru ? 'nullable' : 'required')
+                . '|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], [
             'nama_guru.required' => 'Nama guru wajib diisi.',
             'foto.required'      => 'Foto guru wajib diisi.',
             'foto.image'         => 'File harus berupa gambar.',
             'foto.mimes'         => 'Format foto harus JPG, JPEG, PNG, atau WEBP.',
-            'foto.max'           => 'Ukuran foto maksimal 2MB.',
+            'foto.max'           => 'Ukuran foto maksimal 2 MB.',
         ]);
 
-        if ($request->filled('id_guru')) {
-            $id = Crypt::decrypt($request->id_guru);
-            $guru = Guru::findOrFail($id);
-        } else {
+        // Jika bukan edit, buat data guru baru
+        if (!$guru) {
             $guru = new Guru();
         }
 
+        // Simpan data guru
         $guru->nama_guru = $request->nama_guru;
         $guru->nip = $request->nip;
         $guru->mapel = $request->mapel;
 
+        // Ganti foto hanya jika ada foto baru
         if ($request->hasFile('foto')) {
-            $guru->foto = $request->file('foto')->store('guru', 'public');
+
+            // Hapus foto lama ketika foto baru diunggah
+            if (
+                $guru->foto &&
+                Storage::disk('public')->exists($guru->foto)
+            ) {
+                Storage::disk('public')->delete($guru->foto);
+            }
+
+            $guru->foto = $request->file('foto')
+                ->store('guru', 'public');
         }
 
         $guru->save();
 
         return redirect()
             ->route('admin.guru.index')
-            ->with('success', 'Data guru berhasil disimpan.');
+            ->with(
+                'success',
+                $request->filled('id_guru')
+                    ? 'Data guru berhasil diperbarui.'
+                    : 'Data guru berhasil ditambahkan.'
+            );
     }
+
     /*
     |--------------------------------------------------------------------------
     | ADMIN - DETAIL
@@ -140,9 +178,15 @@ class GuruController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function publicShow($slug)
+    public function publicShow($id)
     {
-        $guru = Guru::where('slug', $slug)->firstOrFail();
+        try {
+            $idGuru = \Illuminate\Support\Facades\Crypt::decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404);
+        }
+
+        $guru = Guru::findOrFail($idGuru);
 
         $profilSekolah = ProfilSekolah::first();
 
@@ -151,6 +195,7 @@ class GuruController extends Controller
             'profilSekolah' => $profilSekolah
         ]);
     }
+
 
     /*
     |--------------------------------------------------------------------------

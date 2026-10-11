@@ -155,15 +155,6 @@
 
     <div class="container">
 
-        {{-- KEMBALI --}}
-
-        <a
-            href="{{ route('public.prestasi') }}"
-            class="detail-back"
-        >
-            ← Kembali ke Prestasi
-        </a>
-
 
         {{-- DETAIL --}}
 

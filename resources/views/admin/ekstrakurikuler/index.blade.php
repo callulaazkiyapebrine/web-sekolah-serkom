@@ -58,7 +58,7 @@
 
         <div class="card-body">
 
-            {{-- KONTROL TABEL: TIDAK IKUT SCROLL --}}
+            {{-- KONTROL TABEL --}}
             <div class="eskul-controls">
 
                 <div class="eskul-length">
@@ -86,7 +86,7 @@
 
             </div>
 
-            {{-- AREA SCROLL TABEL SAJA --}}
+            {{-- AREA SCROLL TABEL --}}
             <div class="eskul-table-wrapper">
                 <table id="dataEskul" class="table table-hover align-middle">
                     <thead>
@@ -104,10 +104,8 @@
                     <tbody>
                         @foreach($ekstrakurikulers as $item)
                             <tr>
-                                {{-- NOMOR --}}
-                                <td class="text-center nomor-column">
-                                    {{ $ekstrakurikulers->firstItem() + $loop->index }}
-                                </td>
+                                {{-- NOMOR OTOMATIS DATATABLES --}}
+                                <td class="text-center nomor-column"></td>
 
                                 {{-- NAMA --}}
                                 <td class="nama-eskul">
@@ -705,6 +703,11 @@
                 const api = this.api();
                 const info = api.page.info();
 
+                // NOMOR URUT OTOMATIS
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = info.start + i + 1;
+                });
+
                 // INFORMASI DATA
                 if (info.recordsDisplay === 0) {
                     $('#infoEskul').text('Tidak ada data yang ditampilkan');
@@ -769,7 +772,7 @@
             }
         });
 
-        // SEARCH TERPISAH, TIDAK IKUT SCROLL TABEL
+        // SEARCH TERPISAH
         $('#cariEskul').on('input', function () {
             tabelEskul.search(this.value).draw();
         });
