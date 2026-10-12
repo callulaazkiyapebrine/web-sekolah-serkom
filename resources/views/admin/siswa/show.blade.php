@@ -175,6 +175,16 @@
         font-weight: 600;
     }
 
+    .siswa-jurusan {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: #dceee1;
+        color: #0b5d3b;
+        font-size: .85rem;
+        font-weight: 600;
+    }
+
     .siswa-card-footer {
         padding: 18px 32px;
         background: #fbfcfb;
@@ -307,6 +317,24 @@
                                 <span class="siswa-gender">Laki-laki</span>
                                 @else
                                 <span class="siswa-gender">Perempuan</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                       {{-- JURUSAN --}}
+                    <div class="siswa-info-item">
+                        <div class="siswa-info-icon">
+                            <i data-feather="users"></i>
+                        </div>
+
+                        <div>
+                            <div class="siswa-info-label">Jurusan</div>
+                            <div class="siswa-info-value">
+                                @if($siswa->jurusan === 'ipa')
+                                <span class="siswa-jurusan">ipa</span>
+                                @else
+                                <span class="siswa-jurusan">ips</span>
                                 @endif
                             </div>
                         </div>

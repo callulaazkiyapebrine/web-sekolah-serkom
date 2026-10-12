@@ -154,7 +154,7 @@
         text-align: right;
     }
 
-     @media (max-width: 992px) {
+    @media (max-width: 992px) {
 
         .footer-main {
             grid-template-columns: 1fr 1fr;
@@ -212,10 +212,10 @@
 
                 <div class="footer-brand">
 
-                   @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->logo)
-                        <img
-                            src="{{ asset('storage/' . $profilSekolah->logo) }}"
-                            alt="{{ $profilSekolah->nama_sekolah }}">
+                    @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->logo)
+                    <img
+                        src="{{ asset('storage/' . $profilSekolah->logo) }}"
+                        alt="{{ $profilSekolah->nama_sekolah }}">
                     @endif
 
                     <div>
@@ -232,40 +232,40 @@
 
                 <div class="footer-social">
 
-                   @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->instagram)
-                        <a href="{{ $profilSekolah->instagram }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Instagram">
-                            <i class="bi bi-instagram"></i>
-                        </a>
+                    @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->instagram)
+                    <a href="{{ $profilSekolah->instagram }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
                     @endif
 
-                  @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->tiktok)
-                        <a href="{{ $profilSekolah->tiktok }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="TikTok">
-                            <i class="bi bi-tiktok"></i>
-                        </a>
+                    @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->tiktok)
+                    <a href="{{ $profilSekolah->tiktok }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TikTok">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
                     @endif
 
-                   @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->facebook)
-                        <a href="{{ $profilSekolah->facebook }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Facebook">
-                            <i class="bi bi-facebook"></i>
-                        </a>
+                    @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->facebook)
+                    <a href="{{ $profilSekolah->facebook }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
                     @endif
 
-                   @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->youtube)
-                        <a href="{{ $profilSekolah->youtube }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="YouTube">
-                            <i class="bi bi-youtube"></i>
-                        </a>
+                    @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->youtube)
+                    <a href="{{ $profilSekolah->youtube }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
                     @endif
 
                 </div>
@@ -290,6 +290,11 @@
                 </a>
 
                 <a href="{{ route('public.galeri') }}">Galeri</a>
+
+                <a href="{{ route('public.profil-pembuat') }}">
+                    Profil Pembuat
+                </a>
+
 
             </div>
 
@@ -334,10 +339,10 @@
         <div class="footer-bottom">
 
             <div class="footer-bottom-brand">
-@if(isset($profilSekolah) && $profilSekolah && $profilSekolah->logo)
-                    <img
-                        src="{{ asset('storage/' . $profilSekolah->logo) }}"
-                        alt="{{ $profilSekolah->nama_sekolah }}">
+                @if(isset($profilSekolah) && $profilSekolah && $profilSekolah->logo)
+                <img
+                    src="{{ asset('storage/' . $profilSekolah->logo) }}"
+                    alt="{{ $profilSekolah->nama_sekolah }}">
                 @endif
 
                 <span>

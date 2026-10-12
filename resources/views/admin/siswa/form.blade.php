@@ -1,3 +1,4 @@
+
 @extends('admin')
 
 @section('title', isset($siswa) ? 'Edit Siswa' : 'Tambah Siswa')
@@ -187,7 +188,7 @@
         </a>
     </div>
 
-    {{-- FORM --}}
+    {{-- FORM CARD --}}
     <div class="form-card">
 
         <div class="form-card-header">
@@ -224,6 +225,7 @@
                             class="form-control @error('nisn') is-invalid @enderror"
                             value="{{ old('nisn', $siswa->nisn ?? '') }}"
                             placeholder="Masukkan NISN"
+                            maxlength="10"
                             required>
 
                         @error('nisn')
@@ -244,6 +246,7 @@
                             class="form-control @error('nama_siswa') is-invalid @enderror"
                             value="{{ old('nama_siswa', $siswa->nama_siswa ?? '') }}"
                             placeholder="Masukkan nama lengkap siswa"
+                            maxlength="40"
                             required>
 
                         @error('nama_siswa')
@@ -283,6 +286,34 @@
                         @enderror
                     </div>
 
+                    {{-- JURUSAN DARI DATABASE --}}
+                    <div class="col-md-6">
+                        <label for="id_jurusan" class="form-label">
+                            Jurusan <span class="required-mark">*</span>
+                        </label>
+
+                        <select
+                            id="id_jurusan"
+                            name="id_jurusan"
+                            class="form-select @error('id_jurusan') is-invalid @enderror"
+                            required>
+
+                            <option value="">Pilih Jurusan</option>
+
+                            @foreach($jurusans as $jurusan)
+                                <option
+                                    value="{{ $jurusan->id_jurusan }}"
+                                    {{ (string) old('id_jurusan', $siswa->id_jurusan ?? '') === (string) $jurusan->id_jurusan ? 'selected' : '' }}>
+                                    {{ $jurusan->nama_jurusan }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('id_jurusan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- TAHUN MASUK --}}
                     <div class="col-md-6">
                         <label for="tahun_masuk" class="form-label">
@@ -307,7 +338,7 @@
 
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- TOMBOL --}}
                 <div class="form-actions">
                     <a href="{{ route('admin.siswa.index') }}" class="btn btn-back">
                         Batal
@@ -325,7 +356,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         if (typeof feather !== 'undefined') {
             feather.replace();
         }
@@ -333,4 +364,3 @@
 </script>
 
 @endsection
-

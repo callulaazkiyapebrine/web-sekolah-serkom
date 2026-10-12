@@ -385,6 +385,21 @@ $profilSekolah = \App\Models\ProfilSekolah::first();
 
                 </li>
 
+                {{-- =================================================
+    PROFIL PEMBUAT
+================================================== --}}
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('public.profil-pembuat') ? 'active' : '' }}"
+                        href="{{ route('public.profil-pembuat') }}">
+
+                        Profil Pembuat
+
+                    </a>
+                </li>
+
+
             </ul>
 
 

@@ -53,9 +53,19 @@
         }
 
         .panel .logo {
-            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
             font-size: 1.25rem;
             letter-spacing: -.02em;
+        }
+
+        .panel .logo img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            flex-shrink: 0;
         }
 
         .panel h2 {
@@ -255,7 +265,10 @@
     <aside class="panel">
 
         <div class="logo">
-            MAN 2 TASIKMALAYA
+            <img
+                src="{{ asset('img/LOGO-SEKOLAH.png') }}"
+                alt="Logo">
+            <span>MAN 2 TASIKMALAYA</span>
         </div>
 
         <div>

@@ -142,6 +142,10 @@ Route::get(
 
 Route::get('/galeri/{id}', [GaleriController::class, 'publicShow'])
     ->name('public.galeri.show');
+
+
+Route::view('/profil-pembuat', 'public.profil-pembuat')
+    ->name('public.profil-pembuat');
 /*
 |--------------------------------------------------------------------------
 | AUTH

@@ -1,4 +1,3 @@
-
 @extends('admin')
 
 @section('title', 'Kelola Data Siswa - MAN 2 Tasikmalaya')
@@ -50,8 +49,9 @@
 
         <div class="card-body">
 
-            {{-- KONTROL TABEL: TIDAK IKUT SCROLL --}}
+            {{-- KONTROL TABEL --}}
             <div class="siswa-table-controls">
+
                 <div class="siswa-length-control">
                     <label for="jumlahSiswa">Tampilkan</label>
 
@@ -77,55 +77,76 @@
                             autocomplete="off">
                     </div>
                 </div>
+
             </div>
 
-            {{-- HANYA TABEL YANG BISA SCROLL HORIZONTAL --}}
+            {{-- TABEL SISWA --}}
             <div class="siswa-table-scroll">
+
                 <table id="dataSiswa" class="table table-hover align-middle">
+
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
                             <th>NISN</th>
                             <th>Nama Siswa</th>
                             <th>Jenis Kelamin</th>
+                            <th>Jurusan</th>
                             <th>Tahun Masuk</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-center kolom-aksi">Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach($siswas as $item)
                         <tr>
+
+                            {{-- NOMOR --}}
                             <td class="text-center nomor-column"></td>
 
+                            {{-- NISN --}}
                             <td class="nisn-column">
                                 {{ $item->nisn }}
                             </td>
 
+                            {{-- NAMA SISWA --}}
                             <td class="nama-siswa">
                                 {{ $item->nama_siswa }}
                             </td>
 
+                            {{-- JENIS KELAMIN --}}
                             <td>
                                 @if($item->jenis_kelamin === 'laki-laki')
                                 <span class="badge-jk">Laki-laki</span>
-                                @else
+                                @elseif($item->jenis_kelamin === 'perempuan')
                                 <span class="badge-jk">Perempuan</span>
+                                @else
+                                <span class="badge-jk">-</span>
                                 @endif
                             </td>
 
-                            <td>
+                            {{-- JURUSAN DARI RELASI --}}
+                            <td class="jurusan-column">
+                                <span class="badge-js">
+                                    {{ $item->jurusan->nama_jurusan ?? '-' }}
+                                </span>
+                            </td>
+
+                            {{-- TAHUN MASUK --}}
+                            <td class="tahun-column">
                                 {{ $item->tahun_masuk ?? '-' }}
                             </td>
 
-                            <td class="text-center">
-                                <div class="d-flex justify-content-center align-items-center gap-1 aksi-wrapper">
+                            {{-- AKSI --}}
+                            <td class="text-center kolom-aksi">
+                                <div class="aksi-wrapper">
 
                                     {{-- DETAIL --}}
                                     <a
                                         href="{{ route('admin.siswa.show', Crypt::encrypt($item->id_siswa)) }}"
                                         class="action-btn view-btn"
-                                        title="Lihat detail">
+                                        title="Lihat detail"
+                                        aria-label="Lihat detail siswa">
                                         <i data-feather="eye"></i>
                                     </a>
 
@@ -135,7 +156,8 @@
                                     <a
                                         href="{{ route('admin.siswa.addEdit', Crypt::encrypt($item->id_siswa)) }}"
                                         class="action-btn edit-btn"
-                                        title="Edit siswa">
+                                        title="Edit siswa"
+                                        aria-label="Edit siswa">
                                         <i data-feather="edit-3"></i>
                                     </a>
 
@@ -143,7 +165,7 @@
                                     <form
                                         action="{{ route('admin.siswa.delete', Crypt::encrypt($item->id_siswa)) }}"
                                         method="POST"
-                                        class="d-inline"
+                                        class="form-hapus-siswa"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data siswa ini?')">
 
                                         @csrf
@@ -152,22 +174,27 @@
                                         <button
                                             type="submit"
                                             class="action-btn delete-btn"
-                                            title="Hapus siswa">
+                                            title="Hapus siswa"
+                                            aria-label="Hapus siswa">
                                             <i data-feather="trash-2"></i>
                                         </button>
+
                                     </form>
 
                                     @endif
 
                                 </div>
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
+
                 </table>
+
             </div>
 
-            {{-- INFO DAN PAGINATION --}}
+            {{-- FOOTER TABEL --}}
             <div class="siswa-table-footer">
                 <div id="infoSiswa" class="siswa-table-info"></div>
                 <div id="paginationSiswa" class="siswa-pagination"></div>
@@ -222,6 +249,7 @@
     .siswa-page .btn-siswa svg {
         width: 17px;
         height: 17px;
+        flex-shrink: 0;
     }
 
     /* ALERT */
@@ -240,6 +268,8 @@
 
     /* CARD */
     .siswa-card {
+        width: 100%;
+        min-width: 0;
         border: 1px solid #dce9df;
         border-radius: 14px;
         overflow: hidden;
@@ -268,15 +298,17 @@
 
     .siswa-card .card-body {
         padding: 22px;
+        min-width: 0;
     }
 
-    /* KONTROL SEARCH DAN JUMLAH DATA */
+    /* KONTROL TABEL */
     .siswa-table-controls {
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        gap: 18px;
+        gap: 20px;
         flex-wrap: wrap;
+        width: 100%;
         margin-bottom: 20px;
     }
 
@@ -328,7 +360,7 @@
         max-width: 100%;
     }
 
-    .siswa-search-box > svg {
+    .siswa-search-box>svg {
         position: absolute;
         top: 50%;
         left: 12px;
@@ -358,7 +390,7 @@
         box-shadow: 0 0 0 3px rgba(25, 135, 84, .10);
     }
 
-    /* AREA SCROLL TABEL */
+    /* SCROLL TABEL */
     .siswa-table-scroll {
         width: 100%;
         overflow-x: auto;
@@ -383,66 +415,111 @@
         border-radius: 8px;
     }
 
-    /* TABEL */
+    /* TABEL UTAMA */
     #dataSiswa {
         width: 100% !important;
-        min-width: 900px;
+        min-width: 1050px;
         table-layout: fixed !important;
         border-collapse: separate;
         border-spacing: 0;
         margin: 0 !important;
     }
 
-    #dataSiswa th:nth-child(1),
-    #dataSiswa td:nth-child(1) {
-        width: 65px !important;
-    }
-
-
-/* Judul NISN */
-
-#dataSiswa th:nth-child(2) {
-    text-align: left;
-    padding-left: 30px;
-}
-
-#dataSiswa td:nth-child(2) {
-    text-align: left !important;
-}
-
-    #dataSiswa th:nth-child(3),
-    #dataSiswa td:nth-child(3) {
-        width: 260px !important;
-    }
-
-    #dataSiswa th:nth-child(4),
-    #dataSiswa td:nth-child(4) {
-        width: 170px !important;
-    }
-
-/* Isi data Tahun Masuk saja */
-#dataSiswa th:nth-child(5),
-#dataSiswa td:nth-child(5) {
-    text-align: center !important;
-    padding-left: 12px;
-}
-
-    #dataSiswa th:nth-child(6),
-    #dataSiswa td:nth-child(6) {
-        width: 120px !important;
-    }
-
+    /* HEADER HIJAU */
     #dataSiswa thead th {
         background: #198754 !important;
+        background-color: #198754 !important;
         color: #fff !important;
         font-size: 13px;
         font-weight: 600;
         padding: 14px 12px !important;
         border: none !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
         vertical-align: middle;
     }
 
+    #dataSiswa thead th:first-child {
+        border-top-left-radius: 8px;
+    }
+
+    #dataSiswa thead th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+    /* NOMOR */
+    #dataSiswa th:nth-child(1),
+    #dataSiswa td:nth-child(1) {
+        width: 65px !important;
+        text-align: center !important;
+    }
+
+
+    /* KOLOM NISN */
+    #dataSiswa th:nth-child(2),
+    #dataSiswa td:nth-child(2) {
+        width: 135px !important;
+        text-align: left !important;
+        padding-left: 16px !important;
+        padding-right: 12px !important;
+    }
+
+    #dataSiswa th:nth-child(2) {
+        white-space: nowrap !important;
+    }
+
+    #dataSiswa td:nth-child(2) {
+        white-space: nowrap !important;
+    }
+
+    #dataSiswa .nisn-column {
+        font-family: Arial, sans-serif;
+        letter-spacing: .2px;
+    }
+
+
+    /* NAMA */
+    #dataSiswa th:nth-child(3),
+    #dataSiswa td:nth-child(3) {
+        width: 240px !important;
+    }
+
+    #dataSiswa .nama-siswa {
+        color: #244b35 !important;
+        font-weight: 600;
+    }
+
+    /* JENIS KELAMIN */
+    #dataSiswa th:nth-child(4),
+    #dataSiswa td:nth-child(4) {
+        width: 165px !important;
+    }
+
+    /* JURUSAN */
+    #dataSiswa th:nth-child(5),
+    #dataSiswa td:nth-child(5) {
+        width: 150px !important;
+        text-align: center !important;
+        padding-left: 12px !important;
+    }
+
+    /* TAHUN MASUK */
+    #dataSiswa th:nth-child(6),
+    #dataSiswa td:nth-child(6) {
+        width: 130px !important;
+        text-align: center !important;
+    }
+
+    /* KOLOM AKSI */
+    #dataSiswa th:nth-child(7),
+    #dataSiswa td:nth-child(7),
+    #dataSiswa thead th.kolom-aksi {
+        width: 180px !important;
+        min-width: 180px !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    /* ISI TABEL */
     #dataSiswa tbody td {
         padding: 13px 12px !important;
         color: #49574e;
@@ -467,24 +544,14 @@
         font-weight: 600;
     }
 
-    #dataSiswa .nisn-column {
-        white-space: nowrap;
-        font-family: Arial, sans-serif;
-        letter-spacing: .2px;
-    }
-
-    #dataSiswa .nama-siswa {
-        color: #244b35 !important;
-        font-weight: 600;
-    }
-
     #dataSiswa td:nth-child(4),
     #dataSiswa td:nth-child(5) {
         white-space: nowrap;
     }
 
-    /* BADGE JENIS KELAMIN */
-    .badge-jk {
+    /* BADGE */
+    .badge-jk,
+    .badge-js {
         display: inline-block;
         background: #e8f6ee;
         color: #166b3b;
@@ -497,11 +564,25 @@
 
     /* TOMBOL AKSI */
     #dataSiswa .aksi-wrapper {
+        width: 100%;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
         white-space: nowrap;
     }
 
+    #dataSiswa .form-hapus-siswa {
+        display: inline-flex;
+        margin: 0;
+        padding: 0;
+    }
+
     #dataSiswa .action-btn {
+        flex: 0 0 32px;
         width: 32px;
+        min-width: 32px;
         height: 32px;
         padding: 0;
         display: inline-flex;
@@ -659,9 +740,9 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        // CEGAH DATATABLES DIINISIALISASI BERULANG
+        // CEGAH INISIALISASI DATATABLES BERULANG
         if ($.fn.DataTable.isDataTable('#dataSiswa')) {
             $('#dataSiswa').DataTable().destroy();
         }
@@ -675,14 +756,13 @@
             lengthChange: true,
             lengthMenu: [10, 25, 50, 100],
             autoWidth: false,
-
-            // HANYA TABEL; KONTROL DIBUAT TERPISAH
             dom: 't',
 
-            order: [[2, 'asc']],
+            order: [
+                [2, 'asc']
+            ],
 
-            columnDefs: [
-                {
+            columnDefs: [{
                     targets: 0,
                     orderable: false,
                     searchable: false,
@@ -693,7 +773,7 @@
                     className: 'nisn-column'
                 },
                 {
-                    targets: 5,
+                    targets: 6,
                     orderable: false,
                     searchable: false,
                     className: 'text-center'
@@ -705,15 +785,17 @@
                 emptyTable: 'Belum ada data siswa'
             },
 
-            drawCallback: function () {
+            drawCallback: function() {
                 const api = this.api();
                 const info = api.page.info();
 
-                // NOMOR URUT MENGIKUTI HALAMAN DATATABLES
+                // NOMOR URUT
                 api.rows({
                     page: 'current'
-                }).every(function (rowIdx, tableLoop, rowLoop) {
-                    $(this.node()).find('.nomor-column').text(info.start + rowLoop + 1);
+                }).every(function(rowIdx, tableLoop, rowLoop) {
+                    $(this.node())
+                        .find('.nomor-column')
+                        .text(info.start + rowLoop + 1);
                 });
 
                 // INFORMASI JUMLAH DATA
@@ -729,7 +811,8 @@
                 }
 
                 if (info.recordsDisplay < info.recordsTotal) {
-                    teksInfo += ' (disaring dari ' + info.recordsTotal + ' total data)';
+                    teksInfo += ' (disaring dari ' +
+                        info.recordsTotal + ' total data)';
                 }
 
                 $('#infoSiswa').text(teksInfo);
@@ -751,7 +834,7 @@
                         'aria-label': 'Halaman ' + label
                     });
 
-                    tombol.on('click', function () {
+                    tombol.on('click', function() {
                         if (!disabled) {
                             api.page(halaman).draw('page');
                         }
@@ -791,24 +874,24 @@
             }
         });
 
-        // SEARCH TERPISAH DARI AREA SCROLL
-        $('#cariSiswa').on('input', function () {
+        // PENCARIAN
+        $('#cariSiswa').on('input', function() {
             tabelSiswa.search(this.value).draw();
         });
 
-        // PILIH JUMLAH DATA
-        $('#jumlahSiswa').on('change', function () {
+        // JUMLAH DATA
+        $('#jumlahSiswa').on('change', function() {
             tabelSiswa.page.len(parseInt(this.value, 10)).draw();
         });
 
-        // ALERT OTOMATIS HILANG SETELAH 3 DETIK
-        setTimeout(function () {
-            $('#successAlert, #errorAlert').fadeOut(300, function () {
+        // ALERT OTOMATIS HILANG
+        setTimeout(function() {
+            $('#successAlert, #errorAlert').fadeOut(300, function() {
                 $(this).remove();
             });
         }, 3000);
 
-        // IKON
+        // IKON FEATHER
         if (typeof feather !== 'undefined') {
             feather.replace();
         }

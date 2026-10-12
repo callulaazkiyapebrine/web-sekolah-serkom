@@ -293,9 +293,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
         gap: 20px;
         width: 100%;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .eskul-length,

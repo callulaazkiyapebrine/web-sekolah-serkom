@@ -212,7 +212,13 @@
                                     ) }}
                         </p>
 
-                        <a href="{{ route('public.ekstrakurikuler.show', [ 'slug' => $eskul->slug ]) }}" class="btn btn-success btn-sm mt-2"> Lihat Detail </a>
+                        @if(!empty($eskul->slug))
+                        <a href="{{ route('public.ekstrakurikuler.show', ['slug' => $eskul->slug]) }}"
+                            class="btn btn-success btn-sm mt-2">
+                            Lihat Detail
+                        </a>
+                        @endif
+
 
                     </div>
 
